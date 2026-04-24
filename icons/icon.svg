@@ -1,0 +1,63 @@
+<svg viewBox="0 0 512 512" xmlns="http://www.w3.org/2000/svg">
+    <defs>
+        <radialGradient id="bg" cx="50%" cy="50%" r="50%">
+            <stop offset="0%" stop-color="#1a1a1a"/>
+            <stop offset="100%" stop-color="#000000"/>
+        </radialGradient>
+        <radialGradient id="glow" cx="50%" cy="50%" r="50%">
+            <stop offset="0%" stop-color="#d4af37" stop-opacity="0.3"/>
+            <stop offset="100%" stop-color="#d4af37" stop-opacity="0"/>
+        </radialGradient>
+    </defs>
+    
+    <!-- Fundo -->
+    <rect width="512" height="512" fill="url(#bg)"/>
+    <circle cx="256" cy="256" r="220" fill="url(#glow)"/>
+    
+    <!-- Moldura dupla -->
+    <circle cx="256" cy="256" r="200" fill="none" stroke="#d4af37" stroke-width="3"/>
+    <circle cx="256" cy="256" r="186" fill="none" stroke="#d4af37" stroke-width="1" opacity="0.5"/>
+    
+    <!-- Tiques -->
+    <g stroke="#d4af37" stroke-width="2" opacity="0.7">
+        <line x1="256" y1="56" x2="256" y2="74"/>
+        <line x1="256" y1="438" x2="256" y2="456"/>
+        <line x1="56" y1="256" x2="74" y2="256"/>
+        <line x1="438" y1="256" x2="456" y2="256"/>
+    </g>
+    <g stroke="#d4af37" stroke-width="1" opacity="0.5">
+        <line x1="397" y1="115" x2="384" y2="128"/>
+        <line x1="115" y1="115" x2="128" y2="128"/>
+        <line x1="397" y1="397" x2="384" y2="384"/>
+        <line x1="115" y1="397" x2="128" y2="384"/>
+    </g>
+    
+    <!-- Pentágono/estrela -->
+    <polygon points="256,96 400,192 346,360 166,360 112,192" fill="none" stroke="#d4af37" stroke-width="3"/>
+    <polygon points="256,96 346,360 112,192 400,192 166,360" fill="none" stroke="#d4af37" stroke-width="1.5" opacity="0.7"/>
+    
+    <!-- Nós vértices -->
+    <g fill="#d4af37">
+        <circle cx="256" cy="96" r="6"/>
+        <circle cx="400" cy="192" r="6"/>
+        <circle cx="346" cy="360" r="6"/>
+        <circle cx="166" cy="360" r="6"/>
+        <circle cx="112" cy="192" r="6"/>
+    </g>
+    <g fill="none" stroke="#d4af37" stroke-width="1.5">
+        <circle cx="256" cy="96" r="11"/>
+        <circle cx="400" cy="192" r="11"/>
+        <circle cx="346" cy="360" r="11"/>
+        <circle cx="166" cy="360" r="11"/>
+        <circle cx="112" cy="192" r="11"/>
+    </g>
+    
+    <!-- Círculo interno -->
+    <circle cx="256" cy="256" r="70" fill="none" stroke="#d4af37" stroke-width="2"/>
+    <circle cx="256" cy="256" r="50" fill="none" stroke="#d4af37" stroke-width="1" opacity="0.6"/>
+    
+    <!-- Olho central -->
+    <ellipse cx="256" cy="256" rx="38" ry="22" fill="none" stroke="#d4af37" stroke-width="2"/>
+    <circle cx="256" cy="256" r="14" fill="#d4af37"/>
+    <circle cx="256" cy="256" r="5" fill="#000"/>
+</svg>
