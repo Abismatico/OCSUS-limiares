@@ -1,5 +1,5 @@
 /* ============================================================
-   OCULUS — RENDERIZAÇÃO DE VIEWS
+   Ocsus — RENDERIZAÇÃO DE VIEWS
    Cada view é uma função que retorna HTML + bind de eventos
    ============================================================ */
 
@@ -18,8 +18,8 @@ Views.home = function() {
         html: `
             <section class="view" id="view-home">
                 <div class="hero">
-                    <div class="hero-sigil">${generateSigil({ seed: 'oculus-home', pillar: 'pinaculo', grade: 3, size: 200 })}</div>
-                    <h1>OCULUS LIMIARES</h1>
+                    <div class="hero-sigil">${generateSigil({ seed: 'Ocsus-home', pillar: 'pinaculo', grade: 3, size: 200 })}</div>
+                    <h1>OCSUS LIMIARES</h1>
                     <p>Grimório Thaumatúrgico de campo — para ocultistas que compreendem que todo ritual tem <em>preço</em>.</p>
                 </div>
                 
@@ -74,7 +74,7 @@ Views.home = function() {
                     </div>
                 </div>
                 <div class="install-panel">
-                    <button class="btn btn-primary btn-block" id="btn-install-home"><i class="fas fa-download"></i> Instalar Oculus</button>
+                    <button class="btn btn-primary btn-block" id="btn-install-home"><i class="fas fa-download"></i> Instalar Ocsus</button>
                     <p class="text-dim" style="margin-top:10px;">Instale o app no celular e jogue no modo standalone.</p>
                 </div>
                 
@@ -715,12 +715,12 @@ Views.about = function() {
         title: 'MANUAL',
         html: `
             <section class="view">
-                <h2>◈ Manual do Oculus</h2>
+                <h2>◈ Manual do Ocsus</h2>
                 <p class="view-intro">Guia rápido de uso e fidelidade ao sistema.</p>
                 
                 <div class="card-clean">
                     <h3>O que é?</h3>
-                    <p style="margin-top:8px;">Oculus Limiares é um <strong style="color:var(--gold)">PWA offline</strong> — aplicativo de celular que funciona sem internet após instalado — destinado a criar, visualizar e gerenciar rituais do RPG <em>Sistema Limiares</em>.</p>
+                    <p style="margin-top:8px;">Ocsus Limiares é um <strong style="color:var(--gold)">PWA offline</strong> — aplicativo de celular que funciona sem internet após instalado — destinado a criar, visualizar e gerenciar rituais do RPG <em>Sistema Limiares</em>.</p>
                 </div>
                 
                 <div class="card-clean">
@@ -754,7 +754,7 @@ Views.about = function() {
                 
                 <div class="card-clean text-center">
                     <p class="text-dim" style="font-style:italic">"O que se abre, não se fecha."</p>
-                    <p class="text-mono text-sm" style="color:var(--gold-dim); margin-top:6px;">OCULUS LIMIARES · v1.0</p>
+                    <p class="text-mono text-sm" style="color:var(--gold-dim); margin-top:6px;">OCSUS LIMIARES · v1.0</p>
                 </div>
             </section>
         `,
@@ -790,7 +790,7 @@ EFEITO: ${ritual.effect}
 
 BACKLASH: ${ritual.backlash}
 
-— Oculus Limiares`;
+— Ocsus Limiares`;
         
         if (navigator.share) {
             navigator.share({ title: ritual.name, text }).catch(() => fallbackCopy(text));

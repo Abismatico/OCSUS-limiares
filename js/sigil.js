@@ -1,5 +1,5 @@
 /* ============================================================
-   OCULUS — GERADOR PROCEDURAL DE SÍMBOLOS (SVG)
+   Ocsus — GERADOR PROCEDURAL DE SÍMBOLOS (SVG)
    Cria sigilos únicos por seed (hash do nome + pilar + grau)
    ============================================================ */
 
@@ -29,7 +29,7 @@ function seededRandom(seed) {
  */
 function generateSigil(opts) {
     const {
-        seed = 'oculus',
+        seed = 'Ocsus',
         pillar = 'pinaculo',
         grade = 1,
         size = 200,

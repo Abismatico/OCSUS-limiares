@@ -1,7 +1,7 @@
-// Oculus Limiares — Service Worker
+// Ocsus Limiares — Service Worker
 // Cache-first para funcionamento 100% offline após primeira carga
 
-const CACHE_NAME = 'oculus-limiares-v2';
+const CACHE_NAME = 'Ocsus-limiares-v2';
 const CORE_ASSETS = [
     './',
     './index.html',

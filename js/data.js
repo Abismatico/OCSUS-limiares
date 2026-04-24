@@ -1,5 +1,5 @@
 /* ============================================================
-   OCULUS LIMIARES — BASE DE DADOS DO SISTEMA
+   Ocsus LIMIARES — BASE DE DADOS DO SISTEMA
    Pilares, Paradigmas, Backlash, Custos e Exemplos
    Fonte: Sistema Limiares RPG
    ============================================================ */

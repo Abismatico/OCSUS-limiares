@@ -1,6 +1,6 @@
 {
-  "name": "Oculus Limiares — Grimório Thaumatúrgico",
-  "short_name": "Oculus",
+  "name": "Ocsus Limiares — Grimório Thaumatúrgico",
+  "short_name": "Ocsus",
   "description": "Aplicativo offline para criar, visualizar e gerenciar rituais do Sistema Limiares RPG. Gerador de símbolos, calculadora de backlash e grimório pessoal.",
   "start_url": "./index.html",
   "scope": "./",

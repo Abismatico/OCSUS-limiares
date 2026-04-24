@@ -1,5 +1,5 @@
 /* ============================================================
-   OCULUS — GERADOR DE NARRATIVA POR PARADIGMA
+   Ocsus — GERADOR DE NARRATIVA POR PARADIGMA
    Transforma um ritual genérico em descrição fiel ao ocultista
    ============================================================ */
 

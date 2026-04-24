@@ -1,5 +1,5 @@
 /* ============================================================
-   OCULUS LIMIARES — CONTROLADOR PRINCIPAL
+   Ocsus LIMIARES — CONTROLADOR PRINCIPAL
    ============================================================ */
 
 const App = {
@@ -119,7 +119,7 @@ const App = {
         main.scrollTop = 0;
         
         // Title
-        document.getElementById('view-title').textContent = v.title || 'OCULUS';
+        document.getElementById('view-title').textContent = v.title || 'Ocsus Limiares';
         
         // Nav active state
         this.setActiveNav(view);
@@ -150,7 +150,7 @@ const App = {
             this.state.deferredPrompt.prompt();
             const res = await this.state.deferredPrompt.userChoice;
             if (res.outcome === 'accepted') {
-                this.toast('Oculus instalado na tela inicial.');
+                this.toast('Ocsus instalado na tela inicial.');
             } else {
                 this.toast('Instalação cancelada.');
             }

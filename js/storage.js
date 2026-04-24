@@ -1,10 +1,10 @@
 /* ============================================================
-   OCULUS — PERSISTÊNCIA LOCAL (localStorage)
+   Ocsus — PERSISTÊNCIA LOCAL (localStorage)
    Grimório de rituais salvos 100% offline
    ============================================================ */
 
-const STORAGE_KEY = 'oculus_limiares_grimoire_v1';
-const SETTINGS_KEY = 'oculus_limiares_settings_v1';
+const STORAGE_KEY = 'Ocsus_limiares_grimoire_v1';
+const SETTINGS_KEY = 'Ocsus_limiares_settings_v1';
 
 const Grimoire = {
     /** Retorna todos os rituais salvos */
@@ -64,7 +64,7 @@ const Grimoire = {
         const url = URL.createObjectURL(blob);
         const a = document.createElement('a');
         a.href = url;
-        a.download = `oculus-grimorio-${new Date().toISOString().slice(0,10)}.json`;
+        a.download = `Ocsus-grimorio-${new Date().toISOString().slice(0,10)}.json`;
         a.click();
         URL.revokeObjectURL(url);
     },

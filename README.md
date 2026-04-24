@@ -1,8 +1,8 @@
-# OCULUS LIMIARES
+# Ocsus LIMIARES
 
 > _Grimório Thaumatúrgico de campo — 100% offline, instalável como app nativo._
 
-**OCULUS LIMIARES** é um **Progressive Web App (PWA)** para o RPG **Sistema Limiares**. Permite que ocultistas criem, visualizem, salvem e gerenciem rituais thaumatúrgicos diretamente do celular, com **sigilos SVG únicos gerados proceduralmente**, narrativa estilizada por paradigma, calculadora de Backlash em tempo real e grimório pessoal armazenado localmente.
+**Ocsus LIMIARES** é um **Progressive Web App (PWA)** para o RPG **Sistema Limiares**. Permite que ocultistas criem, visualizem, salvem e gerenciem rituais thaumatúrgicos diretamente do celular, com **sigilos SVG únicos gerados proceduralmente**, narrativa estilizada por paradigma, calculadora de Backlash em tempo real e grimório pessoal armazenado localmente.
 
 ---
 
@@ -107,7 +107,7 @@ README.md               → Este arquivo
 
 ## 💾 Modelo de dados (localStorage)
 
-**Chave:** `oculus_limiares_grimoire_v1`  
+**Chave:** `Ocsus_limiares_grimoire_v1`  
 **Formato:** `Array<Ritual>`
 
 ```ts
@@ -133,14 +133,14 @@ interface Ritual {
 ### Android (Chrome / Edge)
 1. Abra o site em aba.
 2. Toque no menu **⋮** → **"Instalar app"** / **"Adicionar à tela inicial"**.
-3. O Oculus aparece como app na gaveta.
+3. O Ocsus aparece como app na gaveta.
 
 ### iPhone / iPad (Safari)
 1. Abra em Safari (não funciona em outros browsers no iOS).
 2. Toque em **Compartilhar ↑** → **"Adicionar à Tela de Início"**.
 
 ### Desktop (Chrome)
-1. Ícone **⊕** na barra de endereços → **"Instalar Oculus Limiares"**.
+1. Ícone **⊕** na barra de endereços → **"Instalar Ocsus Limiares"**.
 
 Após instalado, o app **funciona offline completamente** — puxa tudo do cache (Service Worker).
 
@@ -202,4 +202,4 @@ Todas as mecânicas seguem o documento do Sistema Limiares:
 
 ---
 
-**OCULUS LIMIARES · v1.0 · OFFLINE**
+**Ocsus LIMIARES · v1.0 · OFFLINE**
