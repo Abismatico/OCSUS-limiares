@@ -244,6 +244,7 @@ body {
 .fa-dharmachakra::before { content: "☸"; }
 .fa-user-secret::before { content: "🕵"; }
 .fa-scroll::before { content: "📜"; }
+.fa-band-aid::before { content: "🩹"; }
 .fa-link::before { content: "🔗"; }
 .fa-times::before { content: "✕"; }
 .fa-dice::before { content: "🎲"; }

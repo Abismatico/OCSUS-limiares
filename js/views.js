@@ -351,6 +351,7 @@ Views.preview = function(ctx = {}) {
     const pillarNames = Array.isArray(ritual.pillars) ? ritual.pillars.map(id => PILLARS[id]?.name || id).join(' + ') : pillar.name;
     const paradigm = PARADIGMS[ritual.paradigm];
     const cost = GRADE_COSTS[ritual.grade];
+    const costLabel = ritual.cost ? ritual.cost : `${cost.aura} Aura + ${cost.secondary} ${pillar ? pillar.reserveName : 'Reserva'}`;
     const narrative = generateNarrative(ritual);
     const saved = !!ritual.id && !!Grimoire.get(ritual.id);
     
@@ -366,7 +367,7 @@ Views.preview = function(ctx = {}) {
                     <div class="ritual-stats">
                         <div class="ritual-stat">
                             <div class="ritual-stat-label">Custo</div>
-                            <div class="ritual-stat-val">${cost.aura}A + ${cost.secondary}${pillar.reserveName.charAt(0)}</div>
+                            <div class="ritual-stat-val">${escapeHtml(costLabel)}</div>
                         </div>
                         <div class="ritual-stat">
                             <div class="ritual-stat-label">Dificuldade</div>
@@ -391,7 +392,7 @@ Views.preview = function(ctx = {}) {
                     
                     <div class="ritual-section">
                         <div class="ritual-section-title">Teste</div>
-                        <p class="ritual-desc text-sm text-dim">Role <strong style="color:var(--gold)">1d20 + ${pillar.reserveName === 'Aura' ? 'Aura' : 'Aura (ou Intelecto)'}</strong> contra NA <strong style="color:var(--gold)">${cost.difficulty[0]*3}–${cost.difficulty[1]*3}</strong>. Treinado –3 · Especializado –6.</p>
+                        <p class="ritual-desc text-sm text-dim">Role <strong style="color:var(--gold)">1d20 + Aura</strong> contra NA <strong style="color:var(--gold)">${cost.difficulty[0]*3}–${cost.difficulty[1]*3}</strong>. Use a reserva secundária indicada no custo quando aplicável. Treinado –3 · Especializado –6.</p>
                     </div>
                 </div>
                 
@@ -602,7 +603,7 @@ Views.enxertos = function() {
         html: `
             <section class="view" id="view-enxertos">
                 <h2>◈ Enxertos</h2>
-                <p class="view-intro">Forje implantes de corpo e mente. Cada enxerto custa CH — uma reserva permanente de energia que reduz sua Aura máxima. Se a CH cair a 0, o seu corpo pode virar uma anomalia irracional.</p>
+                <p class="view-intro">Forje implantes de corpo e mente. Cada enxerto custa CH — uma reserva permanente de energia que reduz sua Aura máxima. Os melhores enxertos também podem reduzir o NA de um ritual ou amortecer o Backlash quando usados corretamente. Se a CH cair a 0, o seu corpo pode virar uma anomalia irracional.</p>
                 <p class="text-sm text-dim">Memória do Oráculo: ${brainStats.totalEnxertos} enxerto${brainStats.totalEnxertos !== 1 ? 's' : ''} registrados e ${brainStats.totalRituals} ritual${brainStats.totalRituals !== 1 ? 's' : ''} selados. Top pilar: ${PILLARS[topPillar[0]] ? PILLARS[topPillar[0]].name : 'nenhum'}.</p>
 
                 <div class="card-clean">
@@ -1195,6 +1196,18 @@ Views.about = function() {
                     <h3>O que é?</h3>
                     <p style="margin-top:8px;">Ocsus Limiares é um <strong style="color:var(--gold)">PWA offline</strong> — aplicativo de celular que funciona sem internet após instalado — destinado a criar, visualizar e gerenciar rituais do RPG <em>Sistema Limiares</em>.</p>
                 </div>
+
+                <div class="card-clean">
+                    <h3>Significado do sigilo</h3>
+                    <p style="margin-top:8px;">O símbolo que aparece no carregamento e no app é uma marca geométrica do Ocsus — um conjunto de formas que representa foco, equilíbrio e o limiar entre o mundano e o oculto.</p>
+                    <ul class="info-list">
+                        <li><strong>Aro externo</strong> — delimita o campo de ação do ritual e representa o limiar que o Ocultista atravessa.</li>
+                        <li><strong>Polígono central</strong> — a estrutura do pilar primário; cada vértice lembra o modo como o ritual organiza energia e intenção.</li>
+                        <li><strong>Quadrado girado</strong> — o núcleo disciplinado do sigilo: método, controle e o ponto de estabilidade que sustenta o efeito.</li>
+                        <li><strong>Linhas cardeais</strong> — asas do foco e direção; indicam a conexão entre as forças internas e o exterior, sem nenhum sentido místico além da técnica.</li>
+                        <li><strong>Ponto central</strong> — o executor do ritual, o centro de comando que mantém o limiar aberto e segue a intenção do ocultista.</li>
+                    </ul>
+                </div>
                 
                 <div class="card-clean">
                     <h3>Como instalar</h3>
@@ -1383,11 +1396,12 @@ function exportRitual(ritual) {
         if (!card) { App.toast('Nada para exportar.'); return; }
         
         // Tenta usar Web Share API com o texto
-        const pillar = PILLARS[ritual.pillar];
+        const primaryPillar = Array.isArray(ritual.pillars) ? PILLARS[ritual.pillars[0]] : PILLARS[ritual.pillar];
         const cost = GRADE_COSTS[ritual.grade];
+        const costText = ritual.cost ? ritual.cost : `${cost.aura} Aura + ${cost.secondary} ${primaryPillar ? primaryPillar.reserveName : 'Reserva'}`;
         const text = `⟁ ${ritual.name}
-Grau ${ritual.grade} · ${pillar.name}
-Custo: ${cost.aura} Aura + ${cost.secondary} ${pillar.reserveName}
+Grau ${ritual.grade} · ${primaryPillar ? primaryPillar.name : 'Ritual'}
+Custo: ${costText}
 NA: ${cost.difficulty[0]*3}–${cost.difficulty[1]*3}
 
 EFEITO: ${ritual.effect}

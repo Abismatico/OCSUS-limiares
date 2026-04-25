@@ -121,7 +121,7 @@ const RITUAL_LIBRARY = [
     {
         name: 'Lâmina de Carne',
         grade: 2,
-        effect: 'Transforma um membro em uma arma orgânica (Dano 5) por uma cena. Oferece +1 passo de facilidade em testes de ataque.',
+        effect: 'Forma um membro em arma orgânica de Dano 5 por 1 cena. Oferece +1 passo em testes de ataque com essa parte.',
         cost: '2 Aura + 3 Potência',
         backlash: 'Atrofia Residual: após a cena, o membro fica inutilizável até uma Pausa Curta.',
         pillars: ['forma', 'pinaculo']
@@ -129,7 +129,7 @@ const RITUAL_LIBRARY = [
     {
         name: 'Regeneração Voraz',
         grade: 2,
-        effect: 'Recupera 8 pontos divididos entre Potência ou Agilidade.',
+        effect: 'Restaura até 8 pontos divididos entre Potência e Agilidade; metade do valor pode ser aplicado como cura imediata de reserva.',
         cost: '5 Aura ou Intelecto',
         backlash: 'Exaustão Celular: sofre 2 de dano direto na reserva não usada no custo e fica sem usar Esforço por 2 rodadas.',
         pillars: ['forma', 'pinaculo']
@@ -137,7 +137,7 @@ const RITUAL_LIBRARY = [
     {
         name: 'Mutação Bestial',
         grade: 3,
-        effect: 'Recebe +2 de Dano desarmado e +2 de Armadura por uma cena.',
+        effect: 'Concede +2 de Dano desarmado e +2 de Armadura por 1 cena. O controle de Potência é necessário para manter a forma.',
         cost: '4 Potência',
         backlash: 'Frenesi Incoerente: se falhar, sofre 2 de dano de Potência e faz teste de Intelecto (NA 9) para não atacar o alvo mais próximo.',
         pillars: ['forma', 'pinaculo']
@@ -145,7 +145,7 @@ const RITUAL_LIBRARY = [
     {
         name: 'Sobrecarga Sináptica',
         grade: 2,
-        effect: 'Alvo ganha +1 Ação Extra na rodada, +2 em Iniciativa e +1 passo de facilidade em testes de Agilidade por uma cena.',
+        effect: 'Concede +1 Ação Extra e +2 em Iniciativa por 1 rodada. Também dá +1 passo de facilidade em testes de Agilidade enquanto o fluxo nervoso estiver ativo.',
         cost: '3 Aura + 2 Potência',
         backlash: 'Curto-circuito nervoso: na falha, sofre 3 de dano de Intelecto e fica Atordoado.',
         pillars: ['forma', 'primordio']
@@ -153,7 +153,7 @@ const RITUAL_LIBRARY = [
     {
         name: 'Bio-luminescência Expulsiva',
         grade: 1,
-        effect: 'Cria um flash cegante em Alcance Curto. Alvos falham em Agilidade ou ficam Cegos por 1 rodada.',
+        effect: 'Emite um flash cegante em Alcance Curto. Alvos que falharem em Agilidade ficam Cegos por 1 rodada.',
         cost: '3 Aura',
         backlash: 'Queimadura retinal: na falha, sofre 2 de dano de Aura e -1 passo em Percepção por 1 hora.',
         pillars: ['forma', 'primordio']
@@ -161,7 +161,7 @@ const RITUAL_LIBRARY = [
     {
         name: 'Toque de Descarga Vital',
         grade: 2,
-        effect: 'Ataque de toque causa 6 de Dano Energético. Ignora Armadura contra máquinas ou Enxertos.',
+        effect: 'Ao tocar, inflige 6 de Dano Energético. Ignora Armadura de máquinas e enxertos enquanto a corrente atravessa a vítima.',
         cost: '4 Aura + 2 Potência',
         backlash: 'Ricochete elétrico: na falha, você sofre metade do dano pretendido na sua própria Potência.',
         pillars: ['forma', 'primordio']
@@ -169,7 +169,7 @@ const RITUAL_LIBRARY = [
     {
         name: 'Membrana de Absorção',
         grade: 3,
-        effect: 'Concede Resistência 5 contra danos energéticos por uma cena.',
+        effect: 'Cria uma camada defensiva que concede Resistência 5 contra danos energéticos por 1 cena.',
         cost: '5 Aura',
         backlash: 'Sobrecarga de Aura: na falha, perde 4 de Aura e não recupera pontos desta reserva por 1 hora.',
         pillars: ['forma', 'primordio']
@@ -177,7 +177,7 @@ const RITUAL_LIBRARY = [
     {
         name: 'Passagem de Mão',
         grade: 1,
-        effect: 'Retira ou coloca objeto pequeno em bolsas/mochilas fechadas sem precisar abri-las.',
+        effect: 'Move um objeto pequeno dentro ou fora de uma bolsa fechada sem abri-la, contornando selos de fechamento com uma dobra de espaço.',
         cost: '1 Aura',
         backlash: 'Extravio dimensional: o objeto desaparece entre dimensões por 10 minutos.',
         pillars: ['forma', 'tabula']
@@ -185,7 +185,7 @@ const RITUAL_LIBRARY = [
     {
         name: 'Casulo de Vácuo',
         grade: 4,
-        effect: 'Alvo torna-se intocável por 1 rodada, mas fica incapaz de agir.',
+        effect: 'Envolve o alvo em um casulo intangível que o torna intocável por 1 rodada, mas impede qualquer ação direta.',
         cost: '5 Aura',
         backlash: 'Vácuo traumático: o alvo perde 4 de Aura e fica paralisado pela sensação de vazio.',
         pillars: ['tabula', 'eter']
@@ -193,7 +193,7 @@ const RITUAL_LIBRARY = [
     {
         name: 'Véu Fractal',
         grade: 3,
-        effect: 'Dobra superfícies e reflexos para ocultar o lançador, criando um campo que confunde percepções por 2 turnos.',
+        effect: 'Dobra superfícies e reflexos ao redor do lançador, reduzindo a percepção inimiga e confundir sentidos por 2 turnos.',
         cost: '4 Aura + 3 Intelecto',
         backlash: 'Reverb Sistêmico: o lançador vê imagens de si mesmo repetidas por 1 turno e sofre -2 em testes de Agilidade.',
         pillars: ['tabula', 'pinaculo']
@@ -201,7 +201,7 @@ const RITUAL_LIBRARY = [
     {
         name: 'Fenda de Cinábrio',
         grade: 2,
-        effect: 'Abre uma passagem estreita entre duas superfícies. Alvo ou objeto sai no outro extremo em linha reta.',
+        effect: 'Abre uma passagem estreita entre duas superfícies; um alvo ou objeto atravessa com precisão e sai no outro extremo em linha reta.',
         cost: '3 Aura + 2 Potência',
         backlash: 'Ruptura Temporal: o alvo chega ao destino com atraso de 1 rodada e sente tontura.',
         pillars: ['tabula', 'forma']
@@ -209,7 +209,7 @@ const RITUAL_LIBRARY = [
     {
         name: 'Ressonância Inercial',
         grade: 3,
-        effect: 'Manipula o momento de um objeto massivo, lançando-o com precisão e força aumentada.',
+        effect: 'Manipula o momento de um objeto pesado e o lança com força e precisão aumentadas contra um alvo ou obstáculo.',
         cost: '4 Aura + 3 Agilidade',
         backlash: 'Eco de Massa: o objeto ricocheteia de volta com metade da intensidade.',
         pillars: ['primordio', 'tabula']
@@ -217,7 +217,7 @@ const RITUAL_LIBRARY = [
     {
         name: 'Rede de Fagulhas',
         grade: 2,
-        effect: 'Atira uma cortina de fragmentos incandescentes que atrasa inimigos e causa dano contínuo.',
+        effect: 'Projeta uma cortina de fragmentos incandescentes que causa dano contínuo e atrapalha a movimentação de quem atravessa.',
         cost: '3 Aura + 2 Potência',
         backlash: 'Fagulha Reversa: você sofre 1d4 de dano de Potência se o alvo estiver muito perto.',
         pillars: ['primordio', 'pinaculo']
@@ -225,7 +225,7 @@ const RITUAL_LIBRARY = [
     {
         name: 'Marca de Ruínas',
         grade: 1,
-        effect: 'Marca um local ou objeto com uma runa que revela padrões ocultos em 10m de raio.',
+        effect: 'Inscreve um glifo que revela padrões ocultos num raio de 10m, expondo armadilhas e segredos invisíveis.',
         cost: '2 Aura',
         backlash: 'Visão Fragmentada: você recebe fragmentos de informação confusa por 1 minuto.',
         pillars: ['tabula', 'eter']
@@ -233,7 +233,7 @@ const RITUAL_LIBRARY = [
     {
         name: 'Selo do Recinto',
         grade: 4,
-        effect: 'Isola um espaço de até 5m com barreira mental, bloqueando invocações e ataques mágicos por 1 cena.',
+        effect: 'Ergue uma barreira mental de até 5m que bloqueia invocações e ataques mágicos por 1 cena.',
         cost: '6 Aura + 3 Intelecto',
         backlash: 'Selo Inverso: o campo se fecha parcialmente sobre você, reduzindo seu alcance em 2m na próxima cena.',
         pillars: ['pinaculo', 'eter']
@@ -241,7 +241,7 @@ const RITUAL_LIBRARY = [
     {
         name: 'Translação Espectral',
         grade: 5,
-        effect: 'Transfere a essência do lançador para outro corpo ou forma disponível por 1 rodada.',
+        effect: 'Muda sua essência para outro corpo ou forma por 1 rodada, usando a Aura como ponte entre os planos.',
         cost: '8 Aura + 4 Potência',
         backlash: 'Deslocamento Residual: a alma se perde brevemente, causando confusão e -2 em todos os testes por 1 rodada.',
         pillars: ['eter', 'forma']
@@ -249,7 +249,7 @@ const RITUAL_LIBRARY = [
     {
         name: 'Sílex de Dor',
         grade: 2,
-        effect: 'Infunde um ataque com uma onda de dor cortante, infligindo penalidade e dano bônus.',
+        effect: 'Infunde um ataque com dor arcana, causando dano bônus e penalizando o alvo em testes mentais.',
         cost: '3 Aura + 2 Intelecto',
         backlash: 'Reação de Dor: você sofre 1 de dano de Intelecto e perde 1 passo em um teste mental.',
         pillars: ['pinaculo', 'forma']
@@ -257,7 +257,7 @@ const RITUAL_LIBRARY = [
     {
         name: 'Grito de Cinzas',
         grade: 3,
-        effect: 'Lança uma onda de fogo e fuligem que cega e queima por 2 turnos.',
+        effect: 'Libera uma onda de fogo e fuligem que cega os alvos e causa queimaduras por 2 turnos.',
         cost: '5 Aura',
         backlash: 'Fumaça Inveterada: você recebe -2 em Percepção por 1 cena.',
         pillars: ['primordio', 'pinaculo']
@@ -265,7 +265,7 @@ const RITUAL_LIBRARY = [
     {
         name: 'Ossada Enredada',
         grade: 4,
-        effect: 'Invoca tentáculos ósseos que prendem alvos em área por 1 turno.',
+        effect: 'Invoca tentáculos ósseos para prender e imobilizar alvos numa área por 1 turno.',
         cost: '5 Aura + 3 Potência',
         backlash: 'Estrangulamento Animado: os tentáculos se enroscam em você por 1 turno se falhar.',
         pillars: ['forma', 'tabula']
@@ -273,7 +273,7 @@ const RITUAL_LIBRARY = [
     {
         name: 'Ritual do Véu Estilhaçado',
         grade: 5,
-        effect: 'Dá acesso a uma criatura do outro lado do véu por uma pergunta, consumindo uma parte da própria Aura.',
+        effect: 'Conecta você a uma criatura do outro lado do véu para fazer uma única pergunta em troca de Aura.',
         cost: '8 Aura + 4 Intelecto',
         backlash: 'Véu Rasgado: sempre que você tentar se ocultar, há 50% de chance de falha automática por 1 cena.',
         pillars: ['eter', 'pinaculo']
@@ -281,7 +281,7 @@ const RITUAL_LIBRARY = [
     {
         name: 'Polarização do Abismo',
         grade: 4,
-        effect: 'Cria uma anomalia de energia negra que puxa ou repele tudo em 5m.',
+        effect: 'Cria um campo de energia negra que puxa ou repele tudo num raio de 5m.',
         cost: '6 Aura + 3 Potência',
         backlash: 'Atrito Sombrio: você sofre 3 de dano de Aura e sua próxima ação é atrasada.',
         pillars: ['primordio', 'eter']
@@ -289,7 +289,7 @@ const RITUAL_LIBRARY = [
     {
         name: 'Espiral de Contenção',
         grade: 3,
-        effect: 'Constrói um laço geométrico ao redor do alvo que reduz velocidade e defesas.',
+        effect: 'Constrói um laço geométrico em torno do alvo que reduz sua velocidade e suas defesas.',
         cost: '4 Aura + 2 Intelecto',
         backlash: 'Laço Reativo: o objetivo pode tentar puxar você, gerando um ataque gratuito.',
         pillars: ['pinaculo', 'tabula']
@@ -297,7 +297,7 @@ const RITUAL_LIBRARY = [
     {
         name: 'Cálice de Sangue e Cálculo',
         grade: 4,
-        effect: 'Une um selo mental e uma oferta carnal para drenar vida do alvo e transferi-la entre aliados.',
+        effect: 'Combina um selo mental com uma oferta carnal para drenar vida de um alvo e transferi-la entre aliados.',
         cost: '6 Aura + 4 Intelecto',
         backlash: 'O selo se fecha internamente: você sofre 3 de Potência e perde 1 passo em todos os testes por 1 turno.',
         pillars: ['forma', 'pinaculo', 'eter']
@@ -305,7 +305,7 @@ const RITUAL_LIBRARY = [
     {
         name: 'Rede de Topologia Anímica',
         grade: 5,
-        effect: 'Cria uma teia entre memória e espaço, prendendo alvos e distorcendo suas lembranças.',
+        effect: 'Trança espaço e memória para prender alvos enquanto distorce suas lembranças.',
         cost: '8 Aura + 5 Intelecto',
         backlash: 'Fios de memória se enroscam em você: um aliado aleatório sofre confusão por 1 cena.',
         pillars: ['tabula', 'eter', 'pinaculo']
@@ -313,7 +313,7 @@ const RITUAL_LIBRARY = [
     {
         name: 'Trindade de Fusão',
         grade: 3,
-        effect: 'Une matéria, espaço e fogo para gerar um pulso concussivo atravessando armaduras.',
+        effect: 'Une matéria, espaço e fogo num pulso concussivo que atravessa armaduras.',
         cost: '5 Aura + 3 Potência',
         backlash: 'Pressão retorna: você sofre 2 de Potência e perde o equilíbrio por 1 turno.',
         pillars: ['forma', 'tabula', 'primordio']
@@ -321,7 +321,7 @@ const RITUAL_LIBRARY = [
     {
         name: 'Colapso de Runa Dimensional',
         grade: 4,
-        effect: 'Afunda glifos no chão que puxam alvos para uma segunda camada de existência por 1 turno.',
+        effect: 'Enterra glifos no chão que puxam alvos para uma camada dimensional adjacente por 1 turno.',
         cost: '6 Aura + 4 Intelecto',
         backlash: 'O limiar se fecha mal: você recebe 3 de Aura e fica vulnerável por 1 rodada.',
         pillars: ['pinaculo', 'tabula', 'primordio']
@@ -329,7 +329,7 @@ const RITUAL_LIBRARY = [
     {
         name: 'Matriz de Carne e Vácuo',
         grade: 3,
-        effect: 'Confere forma sem peso e pele translúcida que absorve ataques físicos por 1 cena.',
+        effect: 'Dá ao corpo uma forma translúcida e absorvente que mitiga ataques físicos por 1 cena.',
         cost: '5 Aura + 2 Potência',
         backlash: 'A carne vacua puxa: você perde 1 passo de movimento e sente fraqueza por 2 turnos.',
         pillars: ['forma', 'tabula', 'eter']
@@ -337,7 +337,7 @@ const RITUAL_LIBRARY = [
     {
         name: 'Tempestade do Núcleo',
         grade: 5,
-        effect: 'Conjura um vórtice elemental de raios e plasma que arrasa terreno e sanidade ao redor.',
+        effect: 'Conjura um vórtice elemental de raios e plasma que devasta a área ao redor.',
         cost: '8 Aura + 5 Potência',
         backlash: 'A tempestade varre de volta: caos retorna como 4 de dano de Aura e perda de controle.',
         pillars: ['primordio', 'tabula', 'eter']
@@ -345,7 +345,7 @@ const RITUAL_LIBRARY = [
     {
         name: 'Harmonia Frágil',
         grade: 4,
-        effect: 'Sincroniza mente, carne e espírito para restaurar saúde e recarregar Aura lentamente.',
+        effect: 'Sincroniza mente, carne e espírito para restaurar saúde e recarregar Aura de forma deliberada.',
         cost: '6 Aura + 4 Intelecto',
         backlash: 'A sintonia quebra: você fica vulnerável a ataques mentais e sofre -2 de Proteção por 1 cena.',
         pillars: ['pinaculo', 'forma', 'eter']
@@ -573,6 +573,110 @@ const RITUAL_LIBRARY = [
         cost: '4 Aura + 2 Potência',
         backlash: 'A substância se desprende e contamina o portador, causando fraqueza na próxima cena.',
         pillars: ['primordio', 'eter']
+    },
+    {
+        name: 'Vigília do Arquivo Silente',
+        grade: 3,
+        effect: 'Cria um campo de alerta que armazena falhas e revela ações futuras no mesmo espaço.',
+        cost: '4 Aura + 3 Intelecto',
+        backlash: 'O arquivo sussurra verdades incômodas, deixando você com -2 em furtividade por 1 cena.',
+        pillars: ['pinaculo', 'tabula', 'eter']
+    },
+    {
+        name: 'Cápsula do Carcereiro Silente',
+        grade: 5,
+        effect: 'Encapsula um alvo em uma redoma translúcida que drena sua vontade enquanto mantém a presa intacta.',
+        cost: '8 Aura + 5 Agilidade',
+        backlash: 'A cúpula reprime seus próprios reflexos; sua próxima ação perde 50% de eficácia.',
+        pillars: ['tabula', 'forma', 'eter']
+    },
+    {
+        name: 'Marca do Laboratório Assombrado',
+        grade: 4,
+        effect: 'Inscreve um símbolo de pesquisa no ambiente que amplifica efeitos de tecnologia e ritual por 1 cena.',
+        cost: '6 Aura + 4 Intelecto',
+        backlash: 'O símbolo se alimenta de sua atenção; você perde 1 passo em testes de foco.',
+        pillars: ['pinaculo', 'primordio', 'eter']
+    },
+    {
+        name: 'Performa de Corpo-Memorial',
+        grade: 3,
+        effect: 'Projeta o rastro fantasma de um corpo caído, distraindo inimigos e absorvendo dano leve.',
+        cost: '5 Aura + 2 Potência',
+        backlash: 'O fantasma se agarra a você, reduzindo sua movimentação em 1 turno.',
+        pillars: ['forma', 'eter']
+    },
+    {
+        name: 'Estilhaço de Horizonte Rachado',
+        grade: 5,
+        effect: 'Faz um fragmento do mundo real despedaçar-se em várias direções, criando uma zona anômala confusa.',
+        cost: '8 Aura + 5 Potência',
+        backlash: 'A zona rompe sua percepção; seu próximo teste mental falha automaticamente se insistir.',
+        pillars: ['primordio', 'tabula', 'pinaculo']
+    },
+    {
+        name: 'Pulso de Contenção Magnetizada',
+        grade: 4,
+        effect: 'Imobiliza enxertos e construções mecânicas com um campo de força eletromagnético.',
+        cost: '6 Aura + 4 Potência',
+        backlash: 'O campo rebota; você sofre 3 de dano de Potência se estiver muito próximo.',
+        pillars: ['primordio', 'tabula']
+    },
+    {
+        name: 'Arquivo de Eu Divergente',
+        grade: 5,
+        effect: 'Cria uma cópia psíquica de si mesmo que assume uma ação alternativa quando você hesita.',
+        cost: '8 Aura + 4 Intelecto',
+        backlash: 'A cópia retorna com fragmentos de sua mente, causando confusão leve por 1 cena.',
+        pillars: ['pinaculo', 'eter']
+    },
+    {
+        name: 'Rede de Imperfeição',
+        grade: 3,
+        effect: 'Faz falhas microscópicas aparecerem em armaduras e barreiras, reduzindo sua resistência.',
+        cost: '4 Aura + 3 Intelecto',
+        backlash: 'A imperfeição se espalha para você se não se afastar imediatamente.',
+        pillars: ['pinaculo', 'forma']
+    },
+    {
+        name: 'Coração Autômato Abissal',
+        grade: 5,
+        effect: 'Imbuí um enxerto mecânico com vontade própria, aumentando poder físico em troca de risco.',
+        cost: '8 Aura + 5 Potência',
+        backlash: 'A vontade rebelde pode atacar o usuário; 50% de chance de agir contra você no próximo turno.',
+        pillars: ['forma', 'primordio', 'eter']
+    },
+    {
+        name: 'Silêncio de Osso e Cálculo',
+        grade: 2,
+        effect: 'Cobre um corredor com ossos e runas, silenciando passos e bloqueando escutas.',
+        cost: '3 Aura + 2 Intelecto',
+        backlash: 'O silêncio prende sua própria voz por 1 cena.',
+        pillars: ['forma', 'pinaculo']
+    },
+    {
+        name: 'Julgamento do Observador Invertido',
+        grade: 4,
+        effect: 'Força um inimigo a ver você como sua própria prisão, reduzindo sua ação e precisão.',
+        cost: '6 Aura + 3 Intelecto',
+        backlash: 'A visão se inverte em você, causando aversão e -2 de Carisma por 1 cena.',
+        pillars: ['pinaculo', 'eter']
+    },
+    {
+        name: 'Chave do Limiar Quebrado',
+        grade: 3,
+        effect: 'Permite atravessar paredes finas ou grades por 1 turno, mas o espaço adquire bordas cortantes.',
+        cost: '5 Aura + 2 Agilidade',
+        backlash: 'Você sofre 1 de dano de Potência ao sair da parede.',
+        pillars: ['tabula', 'forma']
+    },
+    {
+        name: 'Impulso do Autômato Espectral',
+        grade: 1,
+        effect: 'Aproxima um enxerto ou dispositivo espectral por 5m, atraindo-o suavemente.',
+        cost: '2 Aura',
+        backlash: 'O dispositivo atrai também ruído e atenção.',
+        pillars: ['eter', 'tabula']
     }
 ];
 
