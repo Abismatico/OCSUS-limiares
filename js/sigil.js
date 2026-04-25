@@ -22,6 +22,76 @@ function seededRandom(seed) {
     };
 }
 
+function hexToRgb(hex) {
+    const parsed = hex.replace('#', '');
+    const bigint = parseInt(parsed, 16);
+    return {
+        r: (bigint >> 16) & 255,
+        g: (bigint >> 8) & 255,
+        b: bigint & 255
+    };
+}
+
+function rgbToHex({ r, g, b }) {
+    const component = v => Math.max(0, Math.min(255, Math.round(v))).toString(16).padStart(2, '0');
+    return `#${component(r)}${component(g)}${component(b)}`;
+}
+
+function blendColors(a, b, factor = 0.5) {
+    const c1 = hexToRgb(a);
+    const c2 = hexToRgb(b);
+    return rgbToHex({
+        r: c1.r + (c2.r - c1.r) * factor,
+        g: c1.g + (c2.g - c1.g) * factor,
+        b: c1.b + (c2.b - c1.b) * factor
+    });
+}
+
+const SIGIL_KEYWORD_MAP = {
+    olho: 0,
+    selo: 1,
+    runa: 1,
+    fogo: 2,
+    chama: 2,
+    portal: 3,
+    véu: 4,
+    alma: 4,
+    sombra: 3,
+    sangue: 2,
+    tempestade: 3,
+    memória: 1,
+    dimensão: 3,
+    garras: 0,
+    vortex: 4,
+    raio: 2,
+    nevoa: 0,
+    neural: 1,
+    psíquico: 4,
+    pacto: 3,
+    contrato: 3,
+    espírito: 4
+};
+
+function extractSigilKeywords(text) {
+    if (!text) return [];
+    const normalized = text.toLowerCase();
+    return Object.keys(SIGIL_KEYWORD_MAP).filter(keyword => normalized.includes(keyword));
+}
+
+function getKeywordGlyphType(keyword) {
+    return SIGIL_KEYWORD_MAP[keyword] ?? null;
+}
+
+function normalizePillars(pillars) {
+    if (Array.isArray(pillars)) return pillars.filter(Boolean);
+    return [pillars];
+}
+
+function getPrimaryPillar(pillars) {
+    const list = normalizePillars(pillars);
+    return list[0] || 'pinaculo';
+}
+
 /**
  * Gera um sigilo SVG único e geométrico.
  * @param {object} opts { seed, pillar, grade, size, strokeColor }
@@ -35,24 +105,46 @@ function generateSigil(opts) {
         size = 200,
         strokeColor = '#d4af37'
     } = opts;
+    const pillarList = normalizePillars(pillar);
+    const pillarId = getPrimaryPillar(pillar);
+    const pillarCount = Math.max(1, pillarList.length);
     
-    const hash = hashSeed(String(seed) + pillar + grade);
+    const keywordText = `${seed} ${String(opts.effect || '')} ${String(opts.details || '')} ${Array.isArray(opts.keywords) ? opts.keywords.join(' ') : opts.keywords || ''}`;
+    const textKeywords = extractSigilKeywords(keywordText);
+    const chosenKeyword = textKeywords.length ? textKeywords[0] : null;
+    const keywordGlyphType = chosenKeyword ? getKeywordGlyphType(chosenKeyword) : null;
+    
+    const hash = hashSeed(String(seed) + pillarList.join('-') + grade + (chosenKeyword || ''));
     const rand = seededRandom(hash);
     const cx = size / 2;
     const cy = size / 2;
     const R = size * 0.44;
     
-    const pillarColor = (PILLARS[pillar] && PILLARS[pillar].color) || strokeColor;
+    const pillarColors = pillarList.map(p => (PILLARS[p] && PILLARS[p].color) || strokeColor);
+    const primaryColor = pillarColors[0] || strokeColor;
+    const accentColor = pillarColors[1] || primaryColor;
+    const thirdColor = pillarColors[2] || accentColor;
+    const blendedColor = blendColors(primaryColor, accentColor, 0.55);
+    const highlightColor = pillarCount > 2 ? blendColors(accentColor, thirdColor, 0.5) : accentColor;
+    const pillarColor = pillarCount > 1 ? blendedColor : primaryColor;
+    const glowColor = pillarCount > 1 ? highlightColor : primaryColor;
+    const shapeOpacity = pillarCount > 2 ? 0.22 : 0.18;
     
     let svg = `<svg viewBox="0 0 ${size} ${size}" xmlns="http://www.w3.org/2000/svg" class="sigil-svg">`;
     
     // ====== DEFS (gradientes, filtros) ======
     svg += `<defs>
         <radialGradient id="sigil-glow-${hash}" cx="50%" cy="50%" r="50%">
-            <stop offset="0%" stop-color="${pillarColor}" stop-opacity="0.18"/>
-            <stop offset="70%" stop-color="${pillarColor}" stop-opacity="0.05"/>
-            <stop offset="100%" stop-color="${pillarColor}" stop-opacity="0"/>
+            <stop offset="0%" stop-color="${glowColor}" stop-opacity="0.22"/>
+            <stop offset="45%" stop-color="${blendedColor}" stop-opacity="0.14"/>
+            <stop offset="80%" stop-color="${primaryColor}" stop-opacity="0.06"/>
+            <stop offset="100%" stop-color="${primaryColor}" stop-opacity="0"/>
         </radialGradient>
+        <linearGradient id="sigil-strip-${hash}" x1="0%" y1="0%" x2="100%" y2="100%">
+            <stop offset="0%" stop-color="${primaryColor}" stop-opacity="0.12"/>
+            <stop offset="50%" stop-color="${accentColor}" stop-opacity="0.08"/>
+            <stop offset="100%" stop-color="${thirdColor}" stop-opacity="0.05"/>
+        </linearGradient>
         <filter id="sigil-blur-${hash}" x="-20%" y="-20%" width="140%" height="140%">
             <feGaussianBlur stdDeviation="0.5"/>
         </filter>
@@ -65,7 +157,7 @@ function generateSigil(opts) {
     svg += `<circle cx="${cx}" cy="${cy}" r="${R}" fill="none" stroke="${strokeColor}" stroke-width="1" opacity="0.85"/>`;
     
     // ====== CÍRCULO SECUNDÁRIO ======
-    svg += `<circle cx="${cx}" cy="${cy}" r="${R * 0.94}" fill="none" stroke="${strokeColor}" stroke-width="0.4" opacity="0.5"/>`;
+    svg += `<circle cx="${cx}" cy="${cy}" r="${R * 0.94}" fill="none" stroke="url(#sigil-strip-${hash})" stroke-width="0.8" opacity="0.65"/>`;
     
     // ====== MARCAS DE TIQUE (graduação) — como relógio ocultista ======
     const ticks = 24;
@@ -89,7 +181,7 @@ function generateSigil(opts) {
         pinaculo: 5,
         eter: 8
     };
-    const n = pillarShapes[pillar] || 5;
+    const n = pillarShapes[pillarId] || 5;
     const rotOffset = rand() * Math.PI * 2;
     const polyR = R * 0.72;
     
@@ -111,6 +203,18 @@ function generateSigil(opts) {
         }
         svg += `<path d="${starD}" fill="none" stroke="${strokeColor}" stroke-width="0.6" opacity="0.6"/>`;
     }
+
+    // ====== CAMADA MULTI-PILAR EXTRA ======
+    if (pillarCount > 2) {
+        const innerShape = Math.max(3, Math.min(8, n + 1));
+        const innerR = R * 0.5;
+        let extra = [];
+        for (let i = 0; i < innerShape; i++) {
+            const a = (i * 2 * Math.PI) / innerShape - Math.PI / 2 + rand() * 0.4;
+            extra.push([cx + Math.cos(a) * innerR, cy + Math.sin(a) * innerR]);
+        }
+        svg += `<polygon points="${extra.map(p => p.join(',')).join(' ')}" fill="none" stroke="${highlightColor}" stroke-width="0.8" opacity="0.45" stroke-dasharray="3,2"/>`;
+    }
     
     // ====== RAIOS CONECTANDO CENTRO AOS VÉRTICES ======
     polyPoints.forEach((p, i) => {
@@ -120,9 +224,13 @@ function generateSigil(opts) {
     });
     
     // ====== NÓS NOS VÉRTICES (pequenos círculos) ======
-    polyPoints.forEach(p => {
+    polyPoints.forEach((p, i) => {
+        const glow = rand() > 0.7 && pillarCount > 1;
         svg += `<circle cx="${p[0]}" cy="${p[1]}" r="2.5" fill="${pillarColor}" opacity="0.9"/>`;
         svg += `<circle cx="${p[0]}" cy="${p[1]}" r="4.5" fill="none" stroke="${strokeColor}" stroke-width="0.4" opacity="0.6"/>`;
+        if (glow) {
+            svg += `<circle cx="${p[0]}" cy="${p[1]}" r="6" fill="none" stroke="${accentColor}" stroke-width="0.3" opacity="0.15"/>`;
+        }
     });
     
     // ====== CAMADA INTERNA: círculo + símbolo central ======
@@ -142,10 +250,32 @@ function generateSigil(opts) {
         const type = Math.floor(rand() * 5);
         svg += drawGlyph(gx, gy, glyphSize, type, strokeColor, pillarColor);
     }
+
+    if (keywordGlyphType !== null) {
+        svg += drawGlyph(cx, cy, innerR * 0.65, keywordGlyphType, glowColor, accentColor);
+    }
     
     // ====== PONTO CENTRAL (bindu) ======
     svg += `<circle cx="${cx}" cy="${cy}" r="${2 + grade * 0.6}" fill="${pillarColor}"/>`;
     svg += `<circle cx="${cx}" cy="${cy}" r="${3.5 + grade * 0.8}" fill="none" stroke="${strokeColor}" stroke-width="0.3" opacity="0.7"/>`;
+    
+    // ====== ICONOGRAMA MULTI-PILAR ======
+    if (pillarCount > 1) {
+        const midR = innerR * 1.1;
+        for (let i = 1; i < pillarCount; i++) {
+            const a = (i * Math.PI * 2) / pillarCount + rand() * 0.4;
+            const px = cx + Math.cos(a) * midR;
+            const py = cy + Math.sin(a) * midR;
+            const color = pillarColors[i] || accentColor;
+            svg += `<circle cx="${px}" cy="${py}" r="${1.8 + i * 0.35}" fill="none" stroke="${color}" stroke-width="0.35" opacity="0.55"/>`;
+            if (rand() > 0.4) {
+                svg += `<line x1="${cx}" y1="${cy}" x2="${px}" y2="${py}" stroke="${color}" stroke-width="0.25" opacity="0.35"/>`;
+            }
+            if (rand() > 0.7) {
+                svg += `<circle cx="${px}" cy="${py}" r="${0.9 + rand() * 1.5}" fill="${color}" opacity="0.12"/>`;
+            }
+        }
+    }
     
     // ====== RUNAS ORBITAIS (pontos ao redor) ======
     const runeCount = 6 + grade * 2;
@@ -223,9 +353,14 @@ function drawRune(x, y, angle, type, color) {
  * Gera nome procedural de ritual
  */
 function generateRitualName(pillar, seed) {
-    const frags = NAME_FRAGMENTS[pillar];
+    if (typeof Brain !== 'undefined' && Brain.suggestRitualName) {
+        const brainName = Brain.suggestRitualName(pillar, seed);
+        if (brainName) return brainName;
+    }
+    const pillarId = getPrimaryPillar(pillar);
+    const frags = NAME_FRAGMENTS[pillarId];
     if (!frags) return 'Ritual sem Nome';
-    const hash = hashSeed(String(seed) + pillar);
+    const hash = hashSeed(String(seed) + pillarId);
     const rand = seededRandom(hash);
     const p = frags.prefix[Math.floor(rand() * frags.prefix.length)];
     const m = frags.middle[Math.floor(rand() * frags.middle.length)];
@@ -236,10 +371,31 @@ function generateRitualName(pillar, seed) {
 /**
  * Gera um efeito genérico baseado em exemplo do pilar + grau
  */
-function generateEffect(pillar, grade, seed) {
-    const examples = PILLARS[pillar].examples.filter(e => e.grade === grade);
+function getRitualTemplate(pillars, grade, seed) {
+    const list = normalizePillars(pillars);
+    const candidates = RITUAL_LIBRARY.filter(r => r.pillars.some(p => list.includes(p)) && (typeof r.grade === 'undefined' || r.grade === grade));
+    if (candidates.length === 0) return null;
+    const rand = seededRandom(hashSeed(seed + 'tmpl'));
+    return candidates[Math.floor(rand() * candidates.length)];
+}
+
+function generateEffect(pillars, grade, seed, paradigm) {
+    if (typeof Brain !== 'undefined' && Brain.suggestEffect) {
+        const memorySuggestion = Brain.suggestEffect(pillars, grade, paradigm, seed);
+        if (memorySuggestion) {
+            return Object.assign({ source: 'memory' }, memorySuggestion);
+        }
+    }
+
+    const list = normalizePillars(pillars);
+    const template = getRitualTemplate(list, grade, seed);
+    if (template) {
+        return Object.assign({ source: 'library' }, template);
+    }
+
+    const examples = list.flatMap(id => (PILLARS[id] ? PILLARS[id].examples.filter(e => e.grade === grade) : []));
     if (examples.length === 0) {
-        const all = PILLARS[pillar].examples;
+        const all = list.flatMap(id => PILLARS[id] ? PILLARS[id].examples : []);
         const rand = seededRandom(hashSeed(seed + 'eff'));
         return all[Math.floor(rand() * all.length)];
     }
@@ -250,8 +406,14 @@ function generateEffect(pillar, grade, seed) {
 /**
  * Escolhe um backlash do pilar
  */
-function pickBacklash(pillar, seed) {
-    const list = BACKLASHES[pillar] || BACKLASHES.pinaculo;
+function pickBacklash(pillars, seed) {
+    const list = normalizePillars(pillars);
+    const template = getRitualTemplate(list, null, seed + 'bk');
+    if (template && template.backlash) {
+        return template.backlash;
+    }
+    const fallback = list[0] || 'pinaculo';
+    const entries = BACKLASHES[fallback] || BACKLASHES.pinaculo;
     const rand = seededRandom(hashSeed(seed + 'bk'));
-    return list[Math.floor(rand() * list.length)];
+    return entries[Math.floor(rand() * entries.length)];
 }

@@ -239,7 +239,7 @@ body {
 .fa-download::before { content: "⬇"; }
 .fa-eye::before { content: "👁"; }
 .fa-pen-ruler::before { content: "✎"; }
-.fa-book-skull::before { content: "📖"; }
+.fa-book-skull::before { content: "�"; }
 .fa-bolt::before { content: "⚡"; }
 .fa-dharmachakra::before { content: "☸"; }
 .fa-user-secret::before { content: "🕵"; }
@@ -462,6 +462,46 @@ h1, h2, h3, h4 {
     width: 28px; height: 28px;
     border-bottom: 1px solid var(--gold);
     border-right: 1px solid var(--gold);
+}
+
+.card-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
+    gap: 14px;
+    margin-top: 16px;
+}
+
+.card-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: flex-start;
+    gap: 12px;
+    margin-bottom: 12px;
+}
+
+.pill {
+    display: inline-flex;
+    align-items: center;
+    padding: 4px 8px;
+    font-size: 0.65rem;
+    letter-spacing: 0.2em;
+    text-transform: uppercase;
+    border: 1px solid var(--border);
+    color: var(--ink-dim);
+}
+
+.pill.forma { border-color: #a11f1f; color: #a11f1f; }
+.pill.tabula { border-color: #4a2a6b; color: #4a2a6b; }
+.pill.primordio { border-color: #c2713a; color: #c2713a; }
+.pill.pinaculo { border-color: #d4af37; color: #d4af37; }
+.pill.eter { border-color: #6a9ba8; color: #6a9ba8; }
+
+.section-block {
+    margin-top: 24px;
+}
+
+.section-title {
+    margin-bottom: 12px;
 }
 
 .card-clean {
@@ -853,11 +893,24 @@ input[type="range"]::-moz-range-thumb {
     background: rgba(212,175,55,0.05);
 }
 
-.quick-card i {
-    font-size: 1.6rem;
+.quick-icon {
+    width: 62px;
+    height: 62px;
+    margin: 0 auto 10px;
+    display: grid;
+    place-items: center;
+    border: 1px solid rgba(212,175,55,0.24);
+    border-radius: 22px;
+    background: radial-gradient(circle at top left, rgba(212,175,55,0.12), transparent 42%),
+                radial-gradient(circle at bottom right, rgba(212,175,55,0.08), transparent 40%),
+                rgba(15, 15, 15, 0.92);
+    box-shadow: inset 0 0 12px rgba(255,215,0,0.05);
+}
+
+.quick-icon svg {
+    width: 36px;
+    height: 36px;
     color: var(--gold);
-    margin-bottom: 10px;
-    display: block;
 }
 
 .quick-card h4 {

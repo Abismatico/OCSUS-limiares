@@ -5,6 +5,66 @@
 
 const Views = {};
 
+function quickIcon(type) {
+    const icons = {
+        create: `
+            <svg viewBox="0 0 80 80" xmlns="http://www.w3.org/2000/svg">
+                <circle cx="40" cy="40" r="28" fill="none" stroke="currentColor" stroke-width="3" opacity="0.35"/>
+                <path d="M40 14 L28 46 L40 34 L52 46 Z" fill="currentColor" opacity="0.9"/>
+                <circle cx="40" cy="58" r="4" fill="currentColor"/>
+            </svg>
+        `,
+        grimoire: `
+            <svg viewBox="0 0 80 80" xmlns="http://www.w3.org/2000/svg">
+                <path d="M20 16 H60 V64 H20 Z" fill="none" stroke="currentColor" stroke-width="3"/>
+                <path d="M20 28 H60" stroke="currentColor" stroke-width="2" opacity="0.6"/>
+                <path d="M28 36 H52 M28 44 H52 M28 52 H44" stroke="currentColor" stroke-width="2"/>
+                <circle cx="50" cy="22" r="5" fill="currentColor" opacity="0.8"/>
+            </svg>
+        `,
+        backlash: `
+            <svg viewBox="0 0 80 80" xmlns="http://www.w3.org/2000/svg">
+                <circle cx="40" cy="40" r="26" fill="none" stroke="currentColor" stroke-width="3" opacity="0.25"/>
+                <path d="M34 20 L24 40 H36 L30 60 L50 34 H40 L46 20 Z" fill="currentColor"/>
+                <path d="M18 50 C28 58 52 58 62 50" stroke="currentColor" stroke-width="2" fill="none" opacity="0.65"/>
+            </svg>
+        `,
+        pillars: `
+            <svg viewBox="0 0 80 80" xmlns="http://www.w3.org/2000/svg">
+                <circle cx="24" cy="26" r="4" fill="currentColor"/>
+                <circle cx="56" cy="22" r="4" fill="currentColor"/>
+                <circle cx="42" cy="50" r="4" fill="currentColor"/>
+                <path d="M24 26 L42 50 L56 22" stroke="currentColor" stroke-width="3" fill="none"/>
+                <path d="M18 58 H62" stroke="currentColor" stroke-width="2" opacity="0.6"/>
+            </svg>
+        `,
+        paradigms: `
+            <svg viewBox="0 0 80 80" xmlns="http://www.w3.org/2000/svg">
+                <circle cx="40" cy="40" r="18" fill="none" stroke="currentColor" stroke-width="3"/>
+                <circle cx="40" cy="40" r="30" fill="none" stroke="currentColor" stroke-width="2" opacity="0.4"/>
+                <path d="M40 12 L40 68" stroke="currentColor" stroke-width="2" opacity="0.75"/>
+                <path d="M12 40 L68 40" stroke="currentColor" stroke-width="2" opacity="0.75"/>
+            </svg>
+        `,
+        enxertos: `
+            <svg viewBox="0 0 80 80" xmlns="http://www.w3.org/2000/svg">
+                <rect x="20" y="24" width="40" height="32" fill="none" stroke="currentColor" stroke-width="3" rx="8"/>
+                <circle cx="30" cy="38" r="4" fill="currentColor"/>
+                <circle cx="50" cy="38" r="4" fill="currentColor"/>
+                <path d="M30 46 L50 46" stroke="currentColor" stroke-width="3"/>
+            </svg>
+        `,
+        about: `
+            <svg viewBox="0 0 80 80" xmlns="http://www.w3.org/2000/svg">
+                <path d="M22 18 H58 V62 H22 Z" fill="none" stroke="currentColor" stroke-width="3"/>
+                <path d="M28 26 H52 M28 34 H52 M28 42 H52 M28 50 H44" stroke="currentColor" stroke-width="2"/>
+                <path d="M30 62 L36 70 H44 L50 62" fill="none" stroke="currentColor" stroke-width="3"/>
+            </svg>
+        `
+    };
+    return `<div class="quick-icon">${icons[type] || ''}</div>`;
+}
+
 // ============================================================
 // ORÁCULO (HOME)
 // ============================================================
@@ -43,32 +103,37 @@ Views.home = function() {
                 <h3>Acesso Rápido</h3>
                 <div class="quick-grid">
                     <div class="quick-card" data-go="create">
-                        <i class="fas fa-pen-ruler"></i>
+                        ${quickIcon('create')}
                         <h4>FORJAR</h4>
                         <p>Criar novo ritual</p>
                     </div>
                     <div class="quick-card" data-go="grimoire">
-                        <i class="fas fa-book-skull"></i>
+                        ${quickIcon('grimoire')}
                         <h4>GRIMÓRIO</h4>
                         <p>${total} salvos</p>
                     </div>
                     <div class="quick-card" data-go="backlash">
-                        <i class="fas fa-bolt"></i>
+                        ${quickIcon('backlash')}
                         <h4>BACKLASH</h4>
                         <p>Calculadora</p>
                     </div>
+                    <div class="quick-card" data-go="enxertos">
+                        ${quickIcon('enxertos')}
+                        <h4>ENXERTOS</h4>
+                        <p>Criar e listar implantes</p>
+                    </div>
                     <div class="quick-card" data-go="pillars">
-                        <i class="fas fa-dharmachakra"></i>
+                        ${quickIcon('pillars')}
                         <h4>PILARES</h4>
                         <p>Os cinco eixos</p>
                     </div>
                     <div class="quick-card" data-go="paradigms">
-                        <i class="fas fa-user-secret"></i>
+                        ${quickIcon('paradigms')}
                         <h4>PARADIGMAS</h4>
                         <p>Escolas do Ocultismo</p>
                     </div>
                     <div class="quick-card" data-go="about">
-                        <i class="fas fa-scroll"></i>
+                        ${quickIcon('about')}
                         <h4>MANUAL</h4>
                         <p>Como usar</p>
                     </div>
@@ -106,7 +171,7 @@ Views.home = function() {
 Views.create = function(ctx = {}) {
     // ctx.draft pode vir de um ritual em edição
     const draft = ctx.draft || {
-        pillar: 'pinaculo',
+        pillars: ['pinaculo'],
         grade: 1,
         paradigm: 'hermetico',
         name: '',
@@ -119,14 +184,14 @@ Views.create = function(ctx = {}) {
         html: `
             <section class="view" id="view-create">
                 <h2>◈ Forjar Ritual</h2>
-                <p class="view-intro">Escolha o Pilar, o Grau e o Paradigma. O sistema gerará um <em>sigilo único</em>, custos fiéis e narrativa estilizada.</p>
+                <p class="view-intro">Escolha um ou mais pilares, o Grau e o Paradigma. O Oráculo poderá combinar pilares para rituais híbridos.</p>
                 
                 <!-- PILAR -->
                 <div class="form-group">
-                    <label class="form-label">1. Pilar Metafísico</label>
+                    <label class="form-label">1. Pilares Metafísicos</label>
                     <div class="chip-group" id="chips-pillar">
                         ${Object.values(PILLARS).map(p => `
-                            <button class="chip ${draft.pillar === p.id ? 'active' : ''}" data-pillar="${p.id}">
+                            <button class="chip ${draft.pillars.includes(p.id) ? 'active' : ''}" data-pillar="${p.id}">
                                 <span style="color:${p.color}; font-weight:700;">◆</span> ${p.name}
                             </button>
                         `).join('')}
@@ -180,20 +245,30 @@ Views.create = function(ctx = {}) {
             const state = { ...draft };
             
             const updateHints = () => {
-                const p = PILLARS[state.pillar];
-                root.querySelector('#pillar-hint').textContent = `${p.motto} — domínio: ${p.domain}. Custa ${p.reserveName} (além de Aura).`;
+                const active = state.pillars.map(id => PILLARS[id]);
+                const primary = active[0];
+                root.querySelector('#pillar-hint').textContent = active.length === 1
+                    ? `${primary.motto} — domínio: ${primary.domain}. Custa ${primary.reserveName} (além de Aura).`
+                    : `${active.map(p => p.name).join(' + ')}. Primeiro foco: ${primary.domain}. Custa ${primary.reserveName} (além de Aura).`;
                 
                 const c = GRADE_COSTS[state.grade];
-                root.querySelector('#grade-hint').textContent = `${c.label} — Custo base: ${c.aura} Aura + ${c.secondary} ${p.reserveName}. Dificuldade ${c.difficulty[0]}–${c.difficulty[1]}.`;
+                root.querySelector('#grade-hint').textContent = `${c.label} — Custo base: ${c.aura} Aura + ${c.secondary} ${primary.reserveName}. Dificuldade ${c.difficulty[0]}–${c.difficulty[1]}.`;
             };
             updateHints();
             
             // PILAR
             root.querySelectorAll('[data-pillar]').forEach(el => {
                 el.addEventListener('click', () => {
-                    root.querySelectorAll('[data-pillar]').forEach(x => x.classList.remove('active'));
-                    el.classList.add('active');
-                    state.pillar = el.dataset.pillar;
+                    const key = el.dataset.pillar;
+                    const index = state.pillars.indexOf(key);
+                    if (index === -1) {
+                        state.pillars.push(key);
+                    } else if (state.pillars.length > 1) {
+                        state.pillars.splice(index, 1);
+                    }
+                    root.querySelectorAll('[data-pillar]').forEach(x => {
+                        x.classList.toggle('active', state.pillars.includes(x.dataset.pillar));
+                    });
                     updateHints();
                 });
             });
@@ -238,26 +313,27 @@ Views.create = function(ctx = {}) {
 // Monta o objeto ritual completo a partir do draft
 function buildRitual(draft) {
     const seed = draft.seed || Date.now();
-    const name = draft.name || generateRitualName(draft.pillar, seed);
-    
-    let effect;
-    if (draft.customEffect) {
-        effect = draft.customEffect;
-    } else {
-        const ex = generateEffect(draft.pillar, draft.grade, seed);
-        effect = ex.effect + (ex.name !== name ? ` (inspirado em: ${ex.name})` : '');
-    }
-    
+    const pillars = Array.isArray(draft.pillars) ? draft.pillars : [draft.pillar || 'pinaculo'];
+    const source = !draft.customEffect ? generateEffect(pillars, draft.grade, seed, draft.paradigm) : null;
+    const useTemplateName = source && source.source === 'library' && source.name;
+    const generatedName = useTemplateName ? source.name : generateRitualName(pillars, seed);
+    const name = draft.name || generatedName;
+
+    const effect = draft.customEffect
+        ? draft.customEffect
+        : source.effect + (useTemplateName && source.name !== name ? ` (inspirado em: ${source.name})` : '');
+
     return {
         id: draft.id || null,
         name,
-        pillar: draft.pillar,
+        pillar: pillars[0],
+        pillars,
         grade: draft.grade,
         paradigm: draft.paradigm,
         seed,
         effect,
         customEffect: draft.customEffect || '',
-        backlash: pickBacklash(draft.pillar, seed + 'bk')
+        backlash: pickBacklash(pillars, seed + 'bk')
     };
 }
 
@@ -270,7 +346,9 @@ Views.preview = function(ctx = {}) {
         return Views.home();
     }
     
-    const pillar = PILLARS[ritual.pillar];
+    const pillarId = Array.isArray(ritual.pillars) ? ritual.pillars[0] : ritual.pillar;
+    const pillar = PILLARS[pillarId];
+    const pillarNames = Array.isArray(ritual.pillars) ? ritual.pillars.map(id => PILLARS[id]?.name || id).join(' + ') : pillar.name;
     const paradigm = PARADIGMS[ritual.paradigm];
     const cost = GRADE_COSTS[ritual.grade];
     const narrative = generateNarrative(ritual);
@@ -281,9 +359,9 @@ Views.preview = function(ctx = {}) {
         html: `
             <section class="view" id="view-preview">
                 <div class="ritual-preview" id="ritual-card">
-                    <div class="sigil-display">${generateSigil({ seed: ritual.seed + ritual.name, pillar: ritual.pillar, grade: ritual.grade, size: 280 })}</div>
+                    <div class="sigil-display">${generateSigil({ seed: ritual.seed + ritual.name, pillar: ritual.pillars || pillarId, grade: ritual.grade, size: 280, effect: ritual.effect, details: ritual.backlash, keywords: [paradigm.name, pillarNames] })}</div>
                     <h2 class="ritual-name">${escapeHtml(ritual.name)}</h2>
-                    <p class="ritual-meta">Grau ${ritual.grade} · ${pillar.name} · ${paradigm.name.split(' ').slice(-1)[0]}</p>
+                    <p class="ritual-meta">Grau ${ritual.grade} · ${escapeHtml(pillarNames)} · ${paradigm.name.split(' ').slice(-1)[0]}</p>
                     
                     <div class="ritual-stats">
                         <div class="ritual-stat">
@@ -447,6 +525,401 @@ Views.grimoire = function() {
                     Grimoire.clear();
                     App.toast('Grimório purgado.');
                     App.go('grimoire');
+                });
+            });
+        }
+    };
+};
+
+Views.library = function() {
+    const pillarGroups = Object.values(PILLARS).map(pillar => {
+        return {
+            pillar,
+            templates: RITUAL_LIBRARY.filter(r => r.pillars.includes(pillar.id)),
+            examples: pillar.examples.map(example => ({
+                name: example.name,
+                effect: example.effect,
+                grade: example.grade
+            }))
+        };
+    });
+
+    const totalTemplates = pillarGroups.reduce((sum, group) => sum + group.templates.length, 0);
+    const totalExamples = pillarGroups.reduce((sum, group) => sum + group.examples.length, 0);
+
+    return {
+        title: 'BIBLIOTECA',
+        html: `
+            <section class="view" id="view-library">
+                <h2>◈ Biblioteca</h2>
+                <p class="view-intro">${totalTemplates + totalExamples} rituais disponíveis — ${totalTemplates} modelos + ${totalExamples} exemplos de pilar.</p>
+                ${pillarGroups.map(group => `
+                    <div class="section-block">
+                        <h3 class="section-title">${group.pillar.name}</h3>
+                        ${group.templates.length > 0 ? `
+                            <div class="card-grid">
+                                ${group.templates.map(ritual => `
+                                    <article class="card">
+                                        <div class="card-header">
+                                            <span class="pill ${group.pillar.id}">${group.pillar.name}</span>
+                                            <strong>${escapeHtml(ritual.name)}</strong>
+                                        </div>
+                                        <p class="text-sm text-dim">${escapeHtml(ritual.cost)}</p>
+                                        <p>${escapeHtml(ritual.effect)}</p>
+                                        <p class="text-sm text-dim"><strong>Backlash:</strong> ${escapeHtml(ritual.backlash)}</p>
+                                    </article>
+                                `).join('')}
+                            </div>
+                        ` : ''}
+
+                        <div class="card-grid">
+                            ${group.examples.map(example => `
+                                <article class="card card-clean">
+                                    <div class="card-header">
+                                        <span class="pill ${group.pillar.id}">${group.pillar.name}</span>
+                                        <strong>${escapeHtml(example.name)}</strong>
+                                    </div>
+                                    <p class="text-sm text-dim">Grau ${example.grade}</p>
+                                    <p>${escapeHtml(example.effect)}</p>
+                                </article>
+                            `).join('')}
+                        </div>
+                    </div>
+                `).join('')}
+            </section>
+        `,
+        bind() {}
+    };
+};
+
+Views.enxertos = function() {
+    const primaryPillars = Object.values(PILLARS);
+    const brainStats = Brain.stats();
+    const learnedEnxertos = Brain.all().enxertos;
+    const topPillar = Object.entries(brainStats.byPillar).sort((a,b) => b[1]-a[1])[0] || ['nenhum', 0];
+    return {
+        title: 'ENXERTOS',
+        html: `
+            <section class="view" id="view-enxertos">
+                <h2>◈ Enxertos</h2>
+                <p class="view-intro">Forje implantes de corpo e mente. Cada enxerto custa CH — uma reserva permanente de energia que reduz sua Aura máxima. Se a CH cair a 0, o seu corpo pode virar uma anomalia irracional.</p>
+                <p class="text-sm text-dim">Memória do Oráculo: ${brainStats.totalEnxertos} enxerto${brainStats.totalEnxertos !== 1 ? 's' : ''} registrados e ${brainStats.totalRituals} ritual${brainStats.totalRituals !== 1 ? 's' : ''} selados. Top pilar: ${PILLARS[topPillar[0]] ? PILLARS[topPillar[0]].name : 'nenhum'}.</p>
+
+                <div class="card-clean">
+                    <div class="form-group">
+                        <label class="form-label">1. Nome do Enxerto</label>
+                        <input type="text" class="form-input" id="enx-name" maxlength="80" placeholder="Ex.: Olho de Vidro do Éter">
+                    </div>
+                    <div class="form-group">
+                        <label class="form-label">2. Categoria</label>
+                        <select class="form-input" id="enx-category">
+                            ${Object.keys(ENXERTOS).map(cat => `<option value="${escapeHtml(cat)}">${escapeHtml(cat)}</option>`).join('')}
+                        </select>
+                    </div>
+                    <div class="form-group">
+                        <label class="form-label">3. Pilar Principal</label>
+                        <div class="chip-group" id="enx-pillar-group">
+                            ${primaryPillars.map(p => `
+                                <button class="chip ${p.id === 'pinaculo' ? 'active' : ''}" data-pillar="${p.id}">${p.name}</button>
+                            `).join('')}
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label class="form-label">4. Tipo</label>
+                        <input type="text" class="form-input" id="enx-type" placeholder="Ocular, Neural, Vital, Dorsal...">
+                    </div>
+                    <div class="form-group">
+                        <label class="form-label">5. CH</label>
+                        <input type="number" class="form-input" id="enx-ch" min="1" max="10" value="2">
+                    </div>
+                    <div class="form-group">
+                        <label class="form-label">6. Efeito</label>
+                        <textarea class="form-input" rows="3" id="enx-effect" placeholder="Descreva a utilidade do enxerto."></textarea>
+                    </div>
+                    <div class="form-group">
+                        <label class="form-label">7. Detalhe</label>
+                        <textarea class="form-input" rows="3" id="enx-detail" placeholder="Como ele aparece no corpo, som e sensação."></textarea>
+                    </div>
+                    <div class="form-actions" style="display:flex; gap:0.75rem; flex-wrap:wrap;">
+                        <button class="btn btn-primary" id="btn-create-enxerto">Forjar Enxerto</button>
+                        <button class="btn btn-secondary" id="btn-random-enxerto">Gerar Aleatório</button>
+                        <button class="btn btn-ghost" id="btn-history-enxerto">Com Memória</button>
+                        <button class="btn btn-ghost" id="btn-save-enxerto" disabled>Salvar no Banco</button>
+                        <button class="btn btn-ghost" id="btn-copy-enxerto">Copiar Descrição</button>
+                    </div>
+                    <div id="enxerto-status" class="mt-1 text-dim"></div>
+                </div>
+
+                <div id="enxerto-preview" class="card-clean mt-2" style="display:none;"></div>
+
+                <div class="section-block mt-2">
+                    <h3 class="section-title">Biblioteca de Enxertos</h3>
+                    ${Object.entries(ENXERTOS).map(([category, items]) => `
+                        <div class="section-block">
+                            <h4>${escapeHtml(category)}</h4>
+                            <div class="card-grid">
+                                ${items.map(item => `
+                                    <article class="card card-clean">
+                                        <div class="card-header">
+                                            <strong>${escapeHtml(item.name)}</strong>
+                                            <span class="pill pinaculo">CH ${item.ch}</span>
+                                        </div>
+                                        <p class="text-sm text-dim"><strong>Tipo:</strong> ${escapeHtml(item.type)} · <strong>Pilar:</strong> ${escapeHtml(item.pillar)}</p>
+                                        <p>${escapeHtml(item.effect)}</p>
+                                        <p class="text-sm text-dim">${escapeHtml(item.details)}</p>
+                                    </article>
+                                `).join('')}
+                            </div>
+                        </div>
+                    `).join('')}
+                </div>
+                ${learnedEnxertos.length > 0 ? `
+                <div class="section-block mt-2">
+                    <h3 class="section-title">Enxertos Aprendidos</h3>
+                    <div class="card-grid">
+                        ${learnedEnxertos.map(item => `
+                            <article class="card card-clean">
+                                <div class="card-header">
+                                    <strong>${escapeHtml(item.name)}</strong>
+                                    <span class="pill ${escapeHtml(item.pillar)}">CH ${item.ch}</span>
+                                </div>
+                                <p class="text-sm text-dim"><strong>Categoria:</strong> ${escapeHtml(item.category)} · <strong>Tipo:</strong> ${escapeHtml(item.type)}</p>
+                                <p>${escapeHtml(item.effect)}</p>
+                                <p class="text-sm text-dim">${escapeHtml(item.detail)}</p>
+                            </article>
+                        `).join('')}
+                    </div>
+                </div>
+                ` : ''}
+            </section>
+        `,
+        bind(root) {
+            const state = {
+                pillar: 'pinaculo',
+                lastEnxerto: null
+            };
+
+            const previewBox = root.querySelector('#enxerto-preview');
+            const statusText = root.querySelector('#enxerto-status');
+            const saveEnxertoButton = root.querySelector('#btn-save-enxerto');
+
+            const randomFrom = (arr) => arr[Math.floor(Math.random() * arr.length)];
+            const objectMotifs = {
+                forma: ['Carne', 'Osso', 'Garra', 'Músculo', 'Tecido', 'Cicatriz'],
+                tabula: ['Véu', 'Fenda', 'Nó', 'Porta', 'Estrutura', 'Placa'],
+                primordio: ['Chama', 'Raio', 'Tempestade', 'Cicatriz de Lava', 'Plasma', 'Faísca'],
+                pinaculo: ['Olho', 'Selo', 'Runa', 'Engrama', 'Rede', 'Cálculo'],
+                eter: ['Sombra', 'Espírito', 'Véu', 'Amálgama', 'Pacto', 'Vácuo']
+            };
+            const effectTemplates = {
+                'Sistema Sensorial e Neural': [
+                    'Amplifica a percepção além do visível, detectando presenças e padrões ocultos.',
+                    'Converte sinais nervosos em linguagem de símbolos e projeta avisos internos.',
+                    'Cria um canal sensorial extra que percebe o invisível e os ecos do etéreo.'
+                ],
+                'Sistema Locomotor': [
+                    'Reforça articulações e músculos para movimentos impossíveis e saltos ágeis.',
+                    'Convoca força direcional que desloca o corpo com precisão aumentado e leveza.',
+                    'Transforma membros em ferramentas adaptativas que se dobram ao ambiente.'
+                ],
+                'Sistema Vital e Orgânico': [
+                    'Estabiliza o corpo com reservas ocultas de energia, resistindo a choques e toxinas.',
+                    'Entrelaça carne e aura para regenerar feridas e resistir a efeitos mentais.',
+                    'Cria uma fonte interna de poder que mantém órgãos vitais ativos sob pressão.'
+                ]
+            };
+            const detailTemplates = {
+                forma: [
+                    'Uma capa de pele translúcida pulsa com veias escuras enquanto se adapta ao toque.',
+                    'Filamentos irrigam o implante com uma sensação de calor úmido e controlado.',
+                    'A superfície se movimenta como se respirasse, abrindo-se em sincronia com o corpo.'
+                ],
+                tabula: [
+                    'Linhas finas de luz percorrem o implante como circuitos de uma arquitetura proibida.',
+                    'Seus contornos parecem sugerir portas que não existem, com pulsações geométricas.',
+                    'Um campo invisível ondula no espaço ao redor, esticando e comprimindo o ar.'
+                ],
+                primordio: [
+                    'Uma lâmina incandescente dorme sob a pele, pronta para romper com impacto.',
+                    'O implante exala um calor seco que arde sem queimar a própria carne.',
+                    'Faíscas percorrem nervuras ocultas, como se o corpo tivesse virado fornalha.'
+                ],
+                pinaculo: [
+                    'Runas douradas traçam padrões no couro cabeludo e brilham ao menor pensamento.',
+                    'Pequenos glifos pulsantes cintilam sob a pele, decodificando intenções alheias.',
+                    'A marca parece reescrever sinais nervosos em símbolos que só a mente entende.'
+                ],
+                eter: [
+                    'Uma sombra líquida escorre pela superfície, murmurando nomes indecifráveis.',
+                    'Pequenos pontos de luz fantasmagórica surgem e somem como olhos de outro mundo.',
+                    'O objeto emite um sussurro distante que só quem o carrega consegue ouvir.'
+                ]
+            };
+            const symbolMap = {
+                olho: 'Olho Espectral',
+                selo: 'Selo de Vácuo',
+                runa: 'Runa Pulsante',
+                fogo: 'Chama Sagrada',
+                véu: 'Véu Rúnico',
+                alma: 'Nó de Alma',
+                sombra: 'Crescentes Sombrios',
+                pacto: 'Marca do Contrato',
+                portal: 'Porta Etérea',
+                sangue: 'Gota Profana',
+                tempestade: 'Espiral Tempestuosa',
+                memória: 'Fragmento Mnêmico'
+            };
+
+            const buildEnxertoSymbolLabel = (text, category) => {
+                const normalized = text.toLowerCase();
+                const found = Object.keys(symbolMap).find(key => normalized.includes(key));
+                if (found) return symbolMap[found];
+                return `${category.split(' ')[0]} do Ocultista`;
+            };
+
+            const fillEnxertoFields = (data) => {
+                root.querySelector('#enx-name').value = data.name;
+                root.querySelector('#enx-category').value = data.category;
+                root.querySelector('#enx-type').value = data.type;
+                root.querySelector('#enx-ch').value = data.ch;
+                root.querySelector('#enx-effect').value = data.effect;
+                root.querySelector('#enx-detail').value = data.detail;
+            };
+
+            const createRandomEnxerto = () => {
+                const category = root.querySelector('#enx-category').value;
+                const motif = randomFrom(objectMotifs[state.pillar]);
+                const name = `${randomFrom(['Olho','Selo','Rede','Cálice','Manto','Nó','Pulseira','Glifo'])} de ${motif} ${randomFrom(['Rúnico','Etéreo','Sombrio','Sanguíneo','Neural','Primal'])}`.trim();
+                const type = randomFrom([ 'Ocular', 'Neural', 'Bio-Aura', 'Cranial', 'Dorsal', 'Orgânico', 'Estrutural' ]);
+                const ch = 1 + Math.floor(Math.random() * 4);
+                const effect = randomFrom(effectTemplates[category] || ['Amplifica sentidos ocultos e envia pulsos de energia invisível.']);
+                const detail = randomFrom(detailTemplates[state.pillar] || ['Uma presença estranha pulsa sob a pele, cheia de energia e tensão.']);
+                return { name, category, type, ch, effect, detail };
+            };
+
+            const loadMemoryEnxerto = () => {
+                const suggestion = Brain.suggestEnxerto({
+                    name: root.querySelector('#enx-name').value.trim(),
+                    category: root.querySelector('#enx-category').value,
+                    pillar: state.pillar,
+                    type: root.querySelector('#enx-type').value.trim()
+                });
+                if (!suggestion) {
+                    statusText.textContent = 'O Oráculo ainda não tem memória suficiente de enxertos semelhantes.';
+                    return;
+                }
+                fillEnxertoFields(suggestion);
+                renderPreview();
+                statusText.textContent = 'Geração trazendo um padrão do histórico de enxertos.';
+            };
+
+            const renderPreview = () => {
+                const name = root.querySelector('#enx-name').value.trim();
+                const category = root.querySelector('#enx-category').value;
+                const type = root.querySelector('#enx-type').value.trim() || 'Genérico';
+                const ch = parseInt(root.querySelector('#enx-ch').value, 10) || 1;
+                const effect = root.querySelector('#enx-effect').value.trim();
+                const detail = root.querySelector('#enx-detail').value.trim();
+                const pillar = PILLARS[state.pillar];
+                const symbolLabel = buildEnxertoSymbolLabel(`${name} ${effect} ${detail}`, category);
+                const sigil = generateSigil({
+                    seed: name + effect + detail,
+                    pillar: [state.pillar],
+                    grade: Math.min(ch, 5),
+                    size: 180,
+                    effect,
+                    details: detail,
+                    keywords: [category, type, pillar.name, symbolLabel]
+                });
+
+                if (!name || !effect) {
+                    statusText.textContent = 'Preencha pelo menos o nome e o efeito para forjar o enxerto.';
+                    previewBox.style.display = 'none';
+                    return;
+                }
+
+                previewBox.style.display = 'block';
+                previewBox.innerHTML = `
+                    <div class="ritual-section-title">Enxerto Forjado</div>
+                    <div class="card-grid" style="grid-template-columns:1fr;">
+                        <article class="card">
+                            <div class="card-header">
+                                <strong>${escapeHtml(name)}</strong>
+                                <span class="pill ${pillar.id}">${escapeHtml(category)}</span>
+                            </div>
+                            <p class="text-sm text-dim"><strong>Tipo:</strong> ${escapeHtml(type)} · <strong>Pilar:</strong> ${escapeHtml(pillar.name)} · <strong>CH:</strong> ${ch}</p>
+                            <p class="text-sm text-dim"><strong>Símbolo:</strong> ${escapeHtml(symbolLabel)}</p>
+                            <p>${escapeHtml(effect)}</p>
+                            <p class="text-sm text-dim">${escapeHtml(detail)}</p>
+                            <div class="sigil-display" style="margin-top:16px; text-align:center;">${sigil}</div>
+                            <div class="ritual-section mt-1">
+                                <div class="ritual-section-title">Alerta de CH</div>
+                                <p class="text-sm text-dim">A CH é um custo permanente de reserva. Se reduzir sua Aura máxima a 0, você pode sofrer corrupção ou se tornar uma anomalia irracional.</p>
+                            </div>
+                        </article>
+                    </div>
+                `;
+                state.lastEnxerto = { name, category, type, ch, effect, detail, pillar: state.pillar, createdAt: Date.now() };
+                if (saveEnxertoButton) saveEnxertoButton.disabled = false;
+                statusText.textContent = 'Enxerto forjado. Use o botão copiar ou salve no banco para que o Oráculo aprenda.';
+            };
+
+            root.querySelectorAll('#enx-pillar-group .chip').forEach(el => {
+                el.addEventListener('click', () => {
+                    root.querySelectorAll('#enx-pillar-group .chip').forEach(x => x.classList.remove('active'));
+                    el.classList.add('active');
+                    state.pillar = el.dataset.pillar;
+                });
+            });
+
+            root.querySelector('#btn-create-enxerto').addEventListener('click', (event) => {
+                event.preventDefault();
+                renderPreview();
+            });
+
+            root.querySelector('#btn-random-enxerto').addEventListener('click', (event) => {
+                event.preventDefault();
+                const generated = createRandomEnxerto();
+                fillEnxertoFields(generated);
+                renderPreview();
+            });
+
+            root.querySelector('#btn-history-enxerto').addEventListener('click', (event) => {
+                event.preventDefault();
+                loadMemoryEnxerto();
+            });
+
+            if (saveEnxertoButton) {
+                saveEnxertoButton.addEventListener('click', (event) => {
+                    event.preventDefault();
+                    if (!state.lastEnxerto) {
+                        statusText.textContent = 'Crie um enxerto para salvar no banco de memória.';
+                        return;
+                    }
+                    Brain.rememberEnxerto(state.lastEnxerto);
+                    saveEnxertoButton.disabled = true;
+                    statusText.textContent = 'Enxerto inscrito na memória do Oráculo.';
+                });
+            }
+
+            root.querySelector('#btn-copy-enxerto').addEventListener('click', () => {
+                const name = root.querySelector('#enx-name').value.trim();
+                const category = root.querySelector('#enx-category').value;
+                const type = root.querySelector('#enx-type').value.trim() || 'Genérico';
+                const ch = parseInt(root.querySelector('#enx-ch').value, 10) || 1;
+                const effect = root.querySelector('#enx-effect').value.trim();
+                const detail = root.querySelector('#enx-detail').value.trim();
+                const pillar = PILLARS[state.pillar];
+                if (!name || !effect) {
+                    statusText.textContent = 'Precisa forjar o enxerto antes de copiar.';
+                    return;
+                }
+                const symbolLabel = buildEnxertoSymbolLabel(`${name} ${effect} ${detail}`, category);
+                const payload = `ENXERTO: ${name}\nCategoria: ${category}\nTipo: ${type}\nPilar: ${pillar.name}\nCH: ${ch}\nSímbolo: ${symbolLabel}\nEfeito: ${effect}\nDetalhe: ${detail}`;
+                navigator.clipboard?.writeText(payload).then(() => {
+                    statusText.textContent = 'Descrição copiada para a área de transferência.';
+                }).catch(() => {
+                    statusText.textContent = 'Não foi possível copiar. Use o copiar manualmente.';
                 });
             });
         }
@@ -749,6 +1222,137 @@ Views.about = function() {
                         <li>Perícia: Treinado <strong>–3 NA</strong> · Especializado <strong>–6 NA</strong>.</li>
                         <li>Custo base: <strong>3–5 Aura + 2–4 Reserva</strong> (ou mais em graus altos).</li>
                         <li><strong style="color:var(--blood-bright)">Backlash acontece SEMPRE</strong>, mesmo no sucesso.</li>
+                    </ul>
+                </div>
+                
+                <div class="card-clean">
+                    <h3>Pilares e Rituais</h3>
+                    <p>Você não lança “magias”. Você executa <strong>rituais thaumatúrgicos</strong> — procedimentos perigosos que manipulam forças anômalas para dobrar a realidade.</p>
+                    <p><strong>Aviso importante:</strong> todo ritual tem um preço. Quanto mais poderoso o efeito, maior o risco de Corrupção, perda de sanidade, mutação ou atração de atenção de Organizações. Use com cautela.</p>
+                    <h4>Como funciona um ritual</h4>
+                    <ol class="info-list">
+                        <li>Escolha o Pilar Primário (Forma, Tábula, Primórdio, Pináculo ou Éter). O Pilar é o “estilo” e a “especialidade” do seu Ocultista.</li>
+                        <li>Defina claramente o que o ritual deve fazer.</li>
+                        <li>Descreva os componentes: símbolos, materiais, tempo, sacrifício, local.</li>
+                        <li>O Mestre define a Dificuldade (geralmente 4 a 10).</li>
+                        <li>Faça o teste (normalmente Aura + Intelecto).</li>
+                        <li>Pague o custo em Aura + outra Reserva.</li>
+                        <li>Sofra o Backlash (sempre existe algum risco; você pode reduzir, mas nunca eliminar).</li>
+                        <li>Corrupção: acumula com o uso de rituais. Em níveis altos, o Mestre aplica efeitos permanentes.</li>
+                    </ol>
+                </div>
+                
+                <div class="card-clean">
+                    <h3>Os cinco pilares</h3>
+                    <ul class="info-list">
+                        <li><strong>Forma</strong> → Corpo, matéria, transformações, mutações.</li>
+                        <li><strong>Tábula</strong> → Tempo, espaço, dimensões, deslocamento.</li>
+                        <li><strong>Primórdio</strong> → Elementos, criação, força bruta da natureza.</li>
+                        <li><strong>Pináculo</strong> → Mente, memórias, símbolos, runas, cálculos.</li>
+                        <li><strong>Éter</strong> → Alma, contratos, deidades, terror, emoções.</li>
+                    </ul>
+                    <p>Todo ritual tem custo, risco e backlash. Quanto mais forte o efeito, maior o preço.</p>
+                </div>
+                
+                <div class="card-clean">
+                    <h3>Passo a Passo para lançar um ritual</h3>
+                    <ol class="info-list">
+                        <li>Escolha o Pilar Primário: Sangue, Morte, Energia, Conhecimento ou Medo. Esse pilar define o tema e o tipo de custo.</li>
+                        <li>Descreva claramente o que você quer fazer. Seja específico: ex: “transformar meu braço em uma lâmina de osso” ou “abrir um portal curto de 20 metros”.</li>
+                        <li>Defina os componentes (opcional, mas ajuda): símbolos, runas, sangue, tempo de preparação, local especial, hora certa, sacrifício.</li>
+                        <li>O Mestre define a Dificuldade (0 a 10): efeito simples 3–5; efeito poderoso ou arriscado 6–9.</li>
+                        <li>Faça o teste: role 1d20 + Aura contra o Número-Alvo (Dificuldade × 3).</li>
+                        <li>Pague o custo: todo ritual custa no mínimo Aura + outra Reserva.</li>
+                        <li>Aplique o Backlash: o preço inevitável de mexer com forças anômalas.</li>
+                    </ol>
+                </div>
+                
+                <div class="card-clean">
+                    <h3>Usando esforço em rituais</h3>
+                    <ul class="info-list">
+                        <li>Esforço funciona normalmente, mas é mais perigoso em rituais.</li>
+                        <li>Cada nível de Esforço reduz a dificuldade em 1 passo.</li>
+                        <li>Custo base: 3 pontos da Reserva escolhida + 2 pontos por nível adicional.</li>
+                        <li>Margem reduz esse custo: ex: Margem 2 faz o primeiro nível custar 1 ponto.</li>
+                        <li>Com Margem 3, o primeiro nível de Esforço sai gratuito.</li>
+                        <li>Atenção: usar Esforço aumenta o risco de Backlash e Corrupção. O Mestre pode agravar o Backlash se você exagerar.</li>
+                    </ul>
+                </div>
+                
+                <div class="card-clean">
+                    <h3>Margem no Ocultista</h3>
+                    <p>Margem reduz o custo de Esforço e de ativação de rituais. Exemplo: um ritual que custa 5 Aura com Margem 2 em Aura custa apenas 3 pontos.</p>
+                    <p>Margem alta é extremamente valiosa, pois rituais são caros.</p>
+                </div>
+                
+                <div class="card-clean">
+                    <h3>Custo geral de um ritual</h3>
+                    <ul class="info-list">
+                        <li>Custo mínimo: 3–5 pontos de Aura + 2–4 pontos de outra Reserva.</li>
+                        <li>Custo alto: 7+ Aura + 5+ de outra Reserva para rituais poderosos.</li>
+                        <li>Você sempre gasta Aura ao lançar um ritual.</li>
+                    </ul>
+                </div>
+                
+                <div class="card-clean">
+                    <h3>Backlash e Corrupção</h3>
+                    <p>Todo ritual gera Backlash. Exemplos comuns: dano em Reservas, perda temporária de controle, visões traumáticas, atração de entidades ou atenção de fundações, mutação temporária ou permanente.</p>
+                    <p>Corrupção é uma contagem secreta que aumenta com o uso excessivo de rituais. Em certos limiares, o Mestre aplica efeitos negativos permanentes ou temporários.</p>
+                    <p><strong>Regra de ouro:</strong> quanto mais você força a realidade, mais a realidade força de volta.</p>
+                </div>
+                
+                <div class="card-clean">
+                    <h3>O Backlash funciona apenas tirando 1 no d20?</h3>
+                    <p>Não. O Backlash NÃO acontece só no 1. Ele é a consequência automática de lançar o ritual. Sempre acontece, mesmo em sucesso.</p>
+                    <ul class="info-list">
+                        <li>O teste principal decide se o ritual funciona ou falha.</li>
+                        <li>O Backlash sempre existe.</li>
+                        <li>Quanto maior a dificuldade e o esforço, pior o Backlash.</li>
+                        <li>Preparação melhor e rolagem alta reduzem o Backlash, mas não o eliminam.</li>
+                    </ul>
+                </div>
+                
+                <div class="card-clean">
+                    <h3>Existe meio de baixar o Backlash?</h3>
+                    <p>Sim, há formas de reduzir, mas nunca eliminar completamente. Esta é uma regra central do Ocultista: todo ritual tem preço.</p>
+                    <ul class="info-list">
+                        <li>Preparação cuidadosa reduz o Backlash.</li>
+                        <li>Rituais menores têm Backlash mais leve.</li>
+                        <li>Rolagens altas (15+) reduzem o Backlash.</li>
+                        <li>Uso controlado de Esforço diminui o risco.</li>
+                        <li>Ajuda de outros jogadores pode reduzir o Backlash em 1 nível.</li>
+                    </ul>
+                </div>
+                
+                <div class="card-clean">
+                    <h3>Enxertos</h3>
+                    <p>Enxertos são itens anômalos que o Ocultista carrega e usa como ferramentas ou amplificadores.</p>
+                    <ul class="info-list">
+                        <li>O Ocultista pode carregar até 3 enxertos ao mesmo tempo.</li>
+                        <li>Cada enxerto tem 1 a 3 usos antes de se degradar ou ficar instável.</li>
+                        <li>Usar um enxerto em um ritual reduz a dificuldade em 1 passo ou diminui o Backlash em 1 nível.</li>
+                        <li>Enxertos mais poderosos podem ter efeitos únicos, mas aumentam o risco de Corrupção.</li>
+                    </ul>
+                </div>
+                
+                <div class="card-clean">
+                    <h3>O que muda ao escolher um Pilar?</h3>
+                    <p>Escolher um Pilar Primário define como você faz rituais, qual custo você paga, qual efeito é mais fácil e qual tipo de Backlash é mais comum.</p>
+                    <ul class="info-list">
+                        <li><strong>Tipo de efeito:</strong> cada pilar tem força em certos rituais.</li>
+                        <li><strong>Custo secundário:</strong> o pilar define qual outra Reserva você usa além de Aura.</li>
+                        <li><strong>Facilidade:</strong> rituais do seu Pilar Primário são mais fáceis (redução de 1 passo).</li>
+                        <li><strong>Backlash:</strong> o tipo de consequência varia conforme o pilar.</li>
+                        <li><strong>Estilo narrativo:</strong> muda como você descreve e realiza o ritual.</li>
+                    </ul>
+                    <p>Rituais do seu Pilar Primário são mais baratos, mais fáceis e têm Backlash mais previsível.</p>
+                </div>
+                
+                <div class="card-clean">
+                    <h3>Exemplos práticos</h3>
+                    <ul class="info-list">
+                        <li><strong>Pilar Primário: Forma</strong> — ritual de transformação corporal é mais fácil, mais barato e o Backlash tende a ser mutação ou dor física.</li>
+                        <li><strong>Pilar Primário: Pináculo</strong> — ritual de runas e memórias é mais controlado; ritual de transformação corporal fica mais difícil, mais caro e com backlash mais imprevisível.</li>
                     </ul>
                 </div>
                 
