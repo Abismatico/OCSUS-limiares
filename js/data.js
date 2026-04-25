@@ -709,6 +709,86 @@ const RITUAL_LIBRARY = [
         cost: '8 Aura + 4 Agilidade',
         backlash: 'O arquivo se fecha parcialmente, deixando você desorientado e com -2 em Percepção.',
         pillars: ['tabula', 'eter', 'primordio']
+    },
+    {
+        name: 'Matriz de Reversão Sináptica',
+        grade: 4,
+        effect: 'Inverte temporariamente a percepção do alvo, fazendo-o tratar aliados como ameaças e suas próprias memórias como cadeias de comando.',
+        cost: '6 Aura + 4 Intelecto',
+        backlash: 'A reversão deixa vestígios em sua mente, reduzindo seu próximo teste mental em 2 passos.',
+        pillars: ['pinaculo', 'eter']
+    },
+    {
+        name: 'Ressonância de Ossos Partidos',
+        grade: 3,
+        effect: 'Faz fragmentos de osso implodirem em ondas cortantes que atravessam carne e metal.',
+        cost: '5 Aura + 3 Potência',
+        backlash: 'A ressonância reverbera em seus próprios ossos, causando 2 de dano de Potência.',
+        pillars: ['forma', 'primordio']
+    },
+    {
+        name: 'Ponto de Ruptura Dimensional',
+        grade: 4,
+        effect: 'Cria uma fenda instável que distorce movimento e tempo dentro de um pequeno compartimento.',
+        cost: '6 Aura + 3 Agilidade',
+        backlash: 'A ruptura se fecha em você, reduzindo sua velocidade em 1 passo por 1 cena.',
+        pillars: ['tabula', 'eter']
+    },
+    {
+        name: 'Trovoada do Núcleo Desconectado',
+        grade: 5,
+        effect: 'Descarga uma tempestade elétrica concentrada que desativa enxertos e dispositivos em área.',
+        cost: '8 Aura + 5 Potência',
+        backlash: 'O núcleo descarrega energia de volta em você, causando 3 de dano de Potência.',
+        pillars: ['primordio', 'tabula', 'eter']
+    },
+    {
+        name: 'Cálice de Memória Congelada',
+        grade: 3,
+        effect: 'Preserva uma lembrança viva e a libera como um projétil mental capaz de confundir um inimigo.',
+        cost: '4 Aura + 2 Intelecto',
+        backlash: 'A lembrança puxa sua atenção e dá vantagem contra você no próximo ataque mental.',
+        pillars: ['pinaculo', 'tabula']
+    },
+    {
+        name: 'Máscara de Contenção Abissal',
+        grade: 5,
+        effect: 'Conjura uma máscara de silêncio que aprisiona uma entidade entre a carne e o vazio por 2 turnos.',
+        cost: '7 Aura + 4 Intelecto',
+        backlash: 'A entidade resiste e deixa você assombrado por 1 cena, sofrendo -1 em testes sociais.',
+        pillars: ['eter', 'forma', 'pinaculo']
+    },
+    {
+        name: 'Imagem de Rede Fantasma',
+        grade: 2,
+        effect: 'Projeta um duplicado ilusório que confunde sensores, câmeras e mente por 1 turno.',
+        cost: '3 Aura + 1 Intelecto',
+        backlash: 'A imagem atrai atenção indesejada e aumenta a percepção inimiga em 1 passo.',
+        pillars: ['pinaculo', 'eter']
+    },
+    {
+        name: 'Cárcere de Plano Quebrado',
+        grade: 4,
+        effect: 'Trava um alvo numa cela feita de camadas espaciais instáveis, restringindo movimentos e ações.',
+        cost: '6 Aura + 3 Agilidade',
+        backlash: 'A cela oscila e reduz sua própria mobilidade em 1 passo por 1 cena.',
+        pillars: ['tabula', 'primordio']
+    },
+    {
+        name: 'Circuito de Humanidade Desfeita',
+        grade: 3,
+        effect: 'Reduz o alvo a movimentos automáticos e cálculos frios, retirando sua intenção por 1 turno.',
+        cost: '5 Aura + 3 Intelecto',
+        backlash: 'O efeito volta como uma visão de vazio, dando vantagem no próximo ataque mental contra você.',
+        pillars: ['forma', 'pinaculo']
+    },
+    {
+        name: 'Pilar de Caos Inorgânico',
+        grade: 5,
+        effect: 'Transforma matéria inerte em armadura instável que explode ao ser destruída.',
+        cost: '8 Aura + 5 Potência',
+        backlash: 'A armadura se desfaz violentamente, causando 3 de dano de Potência em você ou aliado próximo.',
+        pillars: ['primordio', 'tabula']
     }
 ];
 
@@ -793,6 +873,22 @@ const ENXERTOS = {
             pillar: 'Tabula + Pináculo',
             effect: 'Amplifica impulsos sensoriais para detectar fluxos de energia e barreiras invisíveis.',
             details: 'O crânio é coberto por filamentos que captam ressonâncias sutis do ambiente.'
+        },
+        {
+            name: 'Visor de Frequência Astral',
+            ch: 3,
+            type: 'Ocular',
+            pillar: 'Éter + Pináculo',
+            effect: 'Revela assinaturas etéreas e sinais de dispositivos ocultos através de paredes finas.',
+            details: 'Uma lente prismática projeta linhas cintilantes que mapeiam frequências interditas.'
+        },
+        {
+            name: 'Orelha de Sussurros Estáticos',
+            ch: 2,
+            type: 'Neural',
+            pillar: 'Pináculo + Éter',
+            effect: 'Capta palavras e intenções na mesma sala como um zumbido de rádio, mesmo com ruído.',
+            details: 'A orelha emite um sussurro contínuo que se torna mais nítido perto de presenças estranhas.'
         }
     ],
     'Sistema Locomotor': [
@@ -875,6 +971,22 @@ const ENXERTOS = {
             pillar: 'Pináculo + Forma',
             effect: 'Sincroniza movimento e reação, concedendo +1 passo em testes de esquiva e corrida.',
             details: 'Linhas de energia percorrem o fêmur, conectando-o ao fluxo neural do corpo.'
+        },
+        {
+            name: 'Ponteira de Gravidade',
+            ch: 2,
+            type: 'Pés',
+            pillar: 'Tabula + Forma',
+            effect: 'Reduz peso e permite saltos curtos e imprecisos sobre obstáculos altos.',
+            details: 'Solados articulados mudam a inclinação do chão sob seus pés como se o ar fosse líquido.'
+        },
+        {
+            name: 'Reforço de Perna Titânica',
+            ch: 3,
+            type: 'Pernas',
+            pillar: 'Forma + Primórdio',
+            effect: 'Aumenta seu impulso e resistência a quedas, permitindo aterrissagens mais duras.',
+            details: 'Os tendões vibram com cada salto, liberando um som metálico de impacto prestes a acontecer.'
         }
     ],
     'Sistema Vital e Orgânico': [
@@ -973,6 +1085,22 @@ const ENXERTOS = {
             pillar: 'Éter + Forma',
             effect: 'Cada golpe que você causa restaura 1 ponto de Potência para você ou um aliado.',
             details: 'Veias brilhantes extraem a energia vital do dano e a transportam como névoa prateada.'
+        },
+        {
+            name: 'Glândula de Estase',
+            ch: 4,
+            type: 'Vital',
+            pillar: 'Forma + Tabula',
+            effect: 'Coloca parte do corpo em estado de suspensão para curar lentamente e resistir a venenos.',
+            details: 'A pele ao redor da glândula fica translúcida e o fluxo sanguíneo diminui como um suspiro.',
+        },
+        {
+            name: 'Chloroplasto Abissal',
+            ch: 3,
+            type: 'Orgânico',
+            pillar: 'Primórdio + Forma',
+            effect: 'Permite extrair energia do ambiente e curar 1 ponto de Potência ao ficar imóvel por 1 turno.',
+            details: 'Pequenas lâminas verde-escuras vibram sob a pele e absorvem até mesmo a luz fraca do ambiente.'
         }
     ],
     'Experimentais': [
@@ -1055,6 +1183,22 @@ const ENXERTOS = {
             pillar: 'Pináculo + Éter',
             effect: 'Cria um sinal silencioso que bloqueia tentativas de invasão mental próximas.',
             details: 'Uma rede de finas lâminas sensoriais se alinhava ao córtex, emitindo um campo calmo e opaco.'
+        },
+        {
+            name: 'Anel de Persistência',
+            ch: 5,
+            type: 'Anel',
+            pillar: 'Tabula + Primórdio',
+            effect: 'Mantém um efeito experimental ativo por mais um turno quando o usuário permanece imóvel.',
+            details: 'O anel brilha com energia azul e vibra suavemente quando a realidade ao redor hesita.'
+        },
+        {
+            name: 'Coração de Torque Dimensional',
+            ch: 6,
+            type: 'Vital',
+            pillar: 'Éter + Tabula',
+            effect: 'Gera um pulso de distorção que desloca parte do dano recebido para outra dimensão.',
+            details: 'O peito pulsa com um peso estranho, como se algo pesado respirasse dentro de você.'
         }
     ],
     'Sistema de Contenção': [
@@ -1089,6 +1233,40 @@ const ENXERTOS = {
             pillar: 'Éter + Pináculo',
             effect: 'Suprime comunicações psíquicas no raio de 5 metros, revelando qualquer mensagem mental.',
             details: 'Pequenos dentes de osso formam uma grade que emite um zumbido abafado e constante.'
+        },
+        {
+            name: 'Cápsula de Reflexão',
+            ch: 3,
+            type: 'Cranial',
+            pillar: 'Pináculo + Tabula',
+            effect: 'Cria uma bolha mental que reflete 1 ataque psíquico de volta ao emissor.',
+            details: 'Uma auréola translúcida envolve a cabeça, pulsando com um eco de cada pensamento recebido.'
+        },
+        {
+            name: 'Bracelete de Masonaria',
+            ch: 3,
+            type: 'Braço',
+            pillar: 'Tabula + Forma',
+            effect: 'Constrói uma barreira física leve ao redor do usuário quando um ataque se aproxima.',
+            details: 'O bracelete se expande e revela uma malha de placas móveis que brilham em tons de aço.'
+        }
+    ],
+    'Sistema de Defesa': [
+        {
+            name: 'Escudo de Fase Transparente',
+            ch: 4,
+            type: 'Dérmico',
+            pillar: 'Tabula + Pináculo',
+            effect: 'Gera uma proteção temporária que torna ataques físicos parcialmente intangíveis.',
+            details: 'Uma camada prismática aparece sobre a pele e cintila como vidro líquido.'
+        },
+        {
+            name: 'Placa de Repouso Sináptico',
+            ch: 3,
+            type: 'Dérmico',
+            pillar: 'Pináculo + Éter',
+            effect: 'Absorve impulsos de choque e aterramento, reduzindo impacto mental e físico.',
+            details: 'A placa vibra lentamente com uma sensação de calma profunda, como um corpo reconciliado.'
         }
     ]
 };

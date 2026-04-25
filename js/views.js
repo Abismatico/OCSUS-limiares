@@ -717,6 +717,8 @@ Views.enxertos = function() {
                 pinaculo: ['Olho', 'Selo', 'Runa', 'Engrama', 'Rede', 'Cálculo'],
                 eter: ['Sombra', 'Espírito', 'Véu', 'Amálgama', 'Pacto', 'Vácuo']
             };
+            const nameObjects = ['Olho', 'Selo', 'Rede', 'Cálice', 'Manto', 'Nó', 'Pulseira', 'Glifo', 'Fio', 'Carapaça', 'Máscara', 'Lente', 'Embrião', 'Costela', 'Garra', 'Cristal', 'Matriz'];
+            const nameDescriptors = ['Rúnico', 'Etéreo', 'Sombrio', 'Sanguíneo', 'Neural', 'Primal', 'Híbrido', 'Anômalo', 'Fragmentado', 'Fluido', 'Abissal', 'Errático', 'Gravitacional', 'Ossificado', 'Fractal'];
             const effectTemplates = {
                 'Sistema Sensorial e Neural': [
                     'Amplifica a percepção além do visível, detectando presenças e padrões ocultos.',
@@ -738,9 +740,35 @@ Views.enxertos = function() {
                     'Cria uma fonte interna de poder que mantém órgãos vitais ativos sob pressão.',
                     'Armazena energia extra em tecidos ocultos para curar feridas em momentos críticos.',
                     'Fortifica órgãos e reflexos, permitindo que o corpo lute mesmo enquanto está perto do colapso.'
+                ],
+                'Experimentais': [
+                    'Conecta realidades improváveis para produzir efeitos que existem entre os planos.',
+                    'Abre uma instância temporária de anomalia para apoiar habilidades improváveis.',
+                    'Funde tecnologia e sangue em um enxerto que age por seus próprios impulsos.',
+                    'Ativa uma anomalia controlada que altera distância, tempo ou identidade por instantes.',
+                    'Cria uma excrescência que responde de forma imprevisível ao ambiente e ao usuário.'
+                ],
+                'Sistema de Contenção': [
+                    'Ergue uma armadura de retenção que bloqueia ataques mágicos e exóticos por um turno.',
+                    'Circunda o usuário com redes de energia que neutralizam invasões mentais.',
+                    'Forma uma câmara dimensional compacta que retém alvos por breves segundos.',
+                    'Gera mecanismos internos que reduzem o efeito de falhas e retrocessos em 1 passo.',
+                    'Implanta barreiras invisíveis que prendem forças estranhas antes que o corpo sofra o impacto.'
+                ],
+                'Sistema de Defesa': [
+                    'Projeta escudos translúcidos que desviam impactos físicos e espirituais.',
+                    'Ativa camadas de defesa que absorvem dano e reduzem efeitos críticos.',
+                    'Faz o corpo operar como uma casamata móvel, endurecendo-se ao ataque.',
+                    'Cria um campo inibitório que quebra ataques diretos antes que alcancem o usuário.',
+                    'Reflete parte da agressão de volta ao emissor como dano resonante.'
                 ]
             };
             const detailTemplates = {
+                default: [
+                    'Uma presença estranha pulsa sob a pele, cheia de energia e tensão.',
+                    'O implante vibra com vontade própria e resiste a movimentos bruscos.',
+                    'Pequenas faíscas internas sugerem que o sucesso dependerá de controle absoluto.'
+                ],
                 forma: [
                     'Uma capa de pele translúcida pulsa com veias escuras enquanto se adapta ao toque.',
                     'Filamentos irrigam o implante com uma sensação de calor úmido e controlado.',
@@ -813,11 +841,16 @@ Views.enxertos = function() {
                 const pillars = state.pillars.length ? state.pillars : ['pinaculo'];
                 const primary = pillars[0];
                 const motif = randomFrom(objectMotifs[primary] || objectMotifs.pinaculo);
-                const name = `${randomFrom(['Olho','Selo','Rede','Cálice','Manto','Nó','Pulseira','Glifo','Fio','Carapaça'])} de ${motif} ${randomFrom(['Rúnico','Etéreo','Sombrio','Sanguíneo','Neural','Primal','Híbrido','Anômalo'])}`.trim();
-                const type = randomFrom([ 'Ocular', 'Neural', 'Bio-Aura', 'Cranial', 'Dorsal', 'Orgânico', 'Estrutural', 'Sintético', 'Ancestral' ]);
-                const ch = 1 + Math.floor(Math.random() * 5);
-                const effect = randomFrom(effectTemplates[category] || ['Amplifica sentidos ocultos e envia pulsos de energia invisível.']);
-                const detail = randomFrom(detailTemplates[primary] || ['Uma presença estranha pulsa sob a pele, cheia de energia e tensão.']);
+                const name = `${randomFrom(nameObjects)} de ${motif} ${randomFrom(nameDescriptors)}`.trim();
+                const type = randomFrom([ 'Ocular', 'Neural', 'Bio-Aura', 'Cranial', 'Dorsal', 'Orgânico', 'Estrutural', 'Sintético', 'Ancestral', 'Mecânico', 'Metatil', 'Espectral' ]);
+                const baseCh = 1 + Math.floor(Math.random() * 5);
+                const ch = Math.min(6, baseCh + (pillars.includes('primordio') || pillars.includes('eter') ? 1 : 0));
+                const effect = randomFrom(effectTemplates[category] || [
+                    'Amplifica sentidos ocultos e envia pulsos de energia invisível.',
+                    'Conjura um equipamento híbrido que responde de forma adaptativa ao ambiente.',
+                    'Cria uma anomalia estabilizada que funciona como uma extensão do corpo e do símbolo.'
+                ]);
+                const detail = randomFrom(detailTemplates[primary] || detailTemplates.default);
                 return { name, category, type, ch, effect, detail, pillars };
             };
 
