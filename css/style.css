@@ -474,10 +474,16 @@ h1, h2, h3, h4 {
 
 .card-header {
     display: flex;
-    justify-content: space-between;
+    flex-wrap: wrap;
+    justify-content: flex-start;
     align-items: flex-start;
-    gap: 12px;
+    gap: 10px;
     margin-bottom: 12px;
+}
+
+.card-header strong {
+    flex: 1 1 100%;
+    min-width: 0;
 }
 
 .pill {

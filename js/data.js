@@ -677,6 +677,38 @@ const RITUAL_LIBRARY = [
         cost: '2 Aura',
         backlash: 'O dispositivo atrai também ruído e atenção.',
         pillars: ['eter', 'tabula']
+    },
+    {
+        name: 'Síncope do Observador',
+        grade: 4,
+        effect: 'Obliterar a atenção do alvo, deixando-o incapaz de reagir com mais do que um gesto automático por 1 turno.',
+        cost: '6 Aura + 3 Intelecto',
+        backlash: 'O observador se volta contra você, impondo -2 em defesa mental por 1 cena.',
+        pillars: ['pinaculo', 'eter']
+    },
+    {
+        name: 'Afloramento de Ossos Silenciosos',
+        grade: 3,
+        effect: 'Ergue uma carapaça de ossos que reduz dano físico e absorve impacto em impulsos cortantes.',
+        cost: '4 Aura + 2 Potência',
+        backlash: 'A casca se fecha com violência, causando 2 de dano de Potência ao usuário.',
+        pillars: ['forma', 'tabula']
+    },
+    {
+        name: 'Memória de Contenção',
+        grade: 4,
+        effect: 'Cria uma armadilha mental no ambiente que retém um invasor até que ele resolva um enigma interno.',
+        cost: '5 Aura + 3 Intelecto',
+        backlash: 'A armadilha também deixa você vulnerável a ataques mentais por 1 turno.',
+        pillars: ['pinaculo', 'tabula', 'eter']
+    },
+    {
+        name: 'Fenda do Arquivo Suprimido',
+        grade: 5,
+        effect: 'Inefável: abre uma lacuna no espaço-tempo que oculta objetos e pessoas do registro por 2 rodadas.',
+        cost: '8 Aura + 4 Agilidade',
+        backlash: 'O arquivo se fecha parcialmente, deixando você desorientado e com -2 em Percepção.',
+        pillars: ['tabula', 'eter', 'primordio']
     }
 ];
 
@@ -745,6 +777,22 @@ const ENXERTOS = {
             pillar: 'Pináculo + Tabula',
             effect: 'Permite sentir vibrações em qualquer superfície conectada, como se fosse toque remoto.',
             details: 'Uma malha de fios transparentes percorre o corpo, ligando o córtex às superfícies ao redor.'
+        },
+        {
+            name: 'Máscara de Percepção Codificada',
+            ch: 2,
+            type: 'Ocular',
+            pillar: 'Pináculo + Éter',
+            effect: 'Transforma estímulos visuais em dados simbólicos que destacam ameaças e anomalias.',
+            details: 'Uma lente preta cristalina projeta padrões logarítmicos sobre o campo de visão.'
+        },
+        {
+            name: 'Véu de Reverberação',
+            ch: 3,
+            type: 'Cranial',
+            pillar: 'Tabula + Pináculo',
+            effect: 'Amplifica impulsos sensoriais para detectar fluxos de energia e barreiras invisíveis.',
+            details: 'O crânio é coberto por filamentos que captam ressonâncias sutis do ambiente.'
         }
     ],
     'Sistema Locomotor': [
@@ -811,6 +859,22 @@ const ENXERTOS = {
             pillar: 'Tabula + Forma',
             effect: 'Reduz peso corporal, permitindo atravessar superfícies frágeis sem quebrá-las.',
             details: 'A sola é revestida com símbolos que manipulam vetores de força sob os pés.'
+        },
+        {
+            name: 'Módulo de Salto Fractal',
+            ch: 3,
+            type: 'Pernas',
+            pillar: 'Tabula + Primórdio',
+            effect: 'Permite saltos com precisão de aterrissagem e aterrissagens suaves em superfícies instáveis.',
+            details: 'Pequenas placas giratórias ajustam o impulso no ar e amortecem a queda ao tocar o solo.'
+        },
+        {
+            name: 'Tarja de Passo Neural',
+            ch: 2,
+            type: 'Coxa',
+            pillar: 'Pináculo + Forma',
+            effect: 'Sincroniza movimento e reação, concedendo +1 passo em testes de esquiva e corrida.',
+            details: 'Linhas de energia percorrem o fêmur, conectando-o ao fluxo neural do corpo.'
         }
     ],
     'Sistema Vital e Orgânico': [
@@ -983,6 +1047,14 @@ const ENXERTOS = {
             pillar: 'Forma + Éter',
             effect: 'Gera um pequeno enxerto secundário que pode ser plantado em um objeto para imbuí-lo por 1 hora.',
             details: 'Pequenas gemas pulsantes crescem na pele e podem ser arrancadas com cuidado.'
+        },
+        {
+            name: 'Implante de Contenção Silente',
+            ch: 5,
+            type: 'Cranial',
+            pillar: 'Pináculo + Éter',
+            effect: 'Cria um sinal silencioso que bloqueia tentativas de invasão mental próximas.',
+            details: 'Uma rede de finas lâminas sensoriais se alinhava ao córtex, emitindo um campo calmo e opaco.'
         }
     ],
     'Sistema de Contenção': [

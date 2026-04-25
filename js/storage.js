@@ -60,11 +60,14 @@ const Brain = {
 
     rememberEnxerto(enxerto) {
         const store = this.all();
+        const pillars = Array.isArray(enxerto.pillars) ? enxerto.pillars : [enxerto.pillar || 'pinaculo'];
+        const primary = pillars[0] || 'pinaculo';
         const entry = {
             id: enxerto.id || `enxerto_${Date.now()}_${Math.random().toString(36).slice(2, 8)}`,
             name: enxerto.name || 'Enxerto Anômalo',
             category: enxerto.category || 'Desconhecida',
-            pillar: enxerto.pillar || 'pinaculo',
+            pillar: primary,
+            pillars,
             type: enxerto.type || 'Genérico',
             ch: enxerto.ch || 1,
             effect: enxerto.effect || '',
@@ -106,7 +109,11 @@ const Brain = {
 
     suggestEnxerto(draft) {
         const store = this.all();
-        const candidates = store.enxertos.filter(item => item.category === draft.category || item.pillar === draft.pillar);
+        const pillars = Array.isArray(draft.pillars) ? draft.pillars : [draft.pillar];
+        const candidates = store.enxertos.filter(item => {
+            const itemPillars = Array.isArray(item.pillars) ? item.pillars : [item.pillar];
+            return item.category === draft.category || itemPillars.some(p => pillars.includes(p));
+        });
         if (!candidates.length) return null;
         return candidates[hashSeed(String(draft.name || draft.category || draft.pillar || Date.now()) + 'enx') % candidates.length];
     },
@@ -115,7 +122,10 @@ const Brain = {
         const store = this.all();
         const byPillar = { forma: 0, tabula: 0, primordio: 0, pinaculo: 0, eter: 0 };
         store.enxertos.forEach(e => {
-            if (byPillar[e.pillar] !== undefined) byPillar[e.pillar]++;
+            const pillars = Array.isArray(e.pillars) ? e.pillars : [e.pillar];
+            pillars.forEach(p => {
+                if (byPillar[p] !== undefined) byPillar[p]++;
+            });
         });
         const byCategory = store.enxertos.reduce((acc, e) => {
             acc[e.category] = (acc[e.category] || 0) + 1;
